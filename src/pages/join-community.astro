@@ -1,0 +1,107 @@
+---
+// import Layout from '../layouts/Layout.astro';
+
+// const comunidades = [
+//   {
+//     id: 1,
+//     nombre: 'Comunidad de Palermo',
+//     codigoPostal: '1425',
+//     descripcion: 'Comunidad activa en Palermo, Buenos Aires.',
+//   },
+//   {
+//     id: 2,
+//     nombre: 'Comunidad de Belgrano',
+//     codigoPostal: '1428',
+//     descripcion: 'Vecinos de Belgrano.',
+//   },
+//   {
+//     id: 3,
+//     nombre: 'Comunidad de Recoleta',
+//     codigoPostal: '1425',
+//     descripcion: 'Grupo de seguridad vecinal en Recoleta.',
+//   },
+// ];
+---
+
+<!-- <Layout title="AlertAR - Unirse a una Comunidad.">
+  <div
+    class="flex flex-col min-h-screen bg-gradient-to-b from-blue-300 to-blue-700 dark:bg-gradient-to-b dark:from-blue-800 dark:to-black"
+  >
+    <div class="flex flex-col items-center justify-center flex-grow p-4">
+      <div
+        class="max-w-md w-full mx-4 p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg"
+      >
+        <header class="text-center">
+          <h1 class="text-3xl font-bold text-black dark:text-gray-100 mb-4">
+            Unirse a una Comunidad
+          </h1>
+        </header>
+
+        <section id="comunidades-list" class="mt-6">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+            Comunidades disponibles
+          </h2>
+
+          <ul class="space-y-4">
+            {
+              comunidades.map((comunidad) => (
+                <li class="p-4 bg-blue-100 dark:bg-gray-700 rounded-lg shadow-md">
+                  <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">
+                    {comunidad.nombre}
+                  </h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    Código Postal: {comunidad.codigoPostal}
+                  </p>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">
+                    {comunidad.descripcion}
+                  </p>
+                  <div class="flex justify-center">
+                    <button
+                      type="button"
+                      id={`${comunidad.id}`}
+                      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+                    >
+                      Unirse
+                    </button>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll('button');
+
+  const handleJoinCommunity = async (event) => {
+    event.preventDefault();
+    const communityId = event.target.id;
+
+    // TODO: Obtener el userId del usuario actual mediante Firebase Auth
+    const response = await fetch(`/api/user/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        communityId: communityId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      window.location.assign('/home');
+    } else {
+      console.error('Error:', data);
+    }
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', handleJoinCommunity);
+  });
+</script> -->

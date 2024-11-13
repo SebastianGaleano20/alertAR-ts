@@ -1,0 +1,192 @@
+---
+
+// import { app } from '../firebase/server';
+// import { getAuth } from 'firebase-admin/auth';
+
+// const auth = getAuth(app);
+
+// async function checkSession() {
+//   if (Astro.cookies.has('__session')) {
+//     const sessionCookie = Astro.cookies.get('__session')?.value;
+//     try {
+//       const decodedCookie = await auth.verifySessionCookie(sessionCookie!);
+//       if (decodedCookie) {
+//         return Astro.redirect('/chat');
+//       }
+//     } catch (error) {
+//       console.error("Error al verificar la cookie de sesión:", error);
+//     }
+//   }
+// }
+
+// await checkSession();
+---
+
+<!-- <div
+  id="loginModal"
+  class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden dark:bg-opacity-70 z-50"
+>
+  <section
+    class="bg-gradient-to-b from-blue-300 to-blue-700 dark:bg-gradient-to-b dark:from-blue-800 dark:to-black dark:text-white p-6 md:p-10 rounded-2xl shadow-md w-full max-w-md relative max-h-[90vh] overflow-auto"
+  >
+    <header class="flex justify-end">
+      <button
+        class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white"
+        id="closeLoginModalBtn"
+        type="button"
+        aria-label="Cerrar"
+      >
+        Cerrar
+      </button>
+    </header>
+    <main>
+        <section class="flex flex-col items-center justify-center mb-6">
+          <img src="/assets/icons/login-icon.webp" alt="Icono de inicio de sesión" class="w-12 h-12" />
+        <h2 id="login-title" class="text-center text-2xl mb-4">Iniciar Sesión</h2>
+      </section>
+      <form id="loginForm">
+        <div class="mb-4">
+          <label for="login-email" class="sr-only">Correo Electrónico</label>
+          <input
+            type="email"
+            id="login-email"
+            name="email"
+            placeholder="Correo Electrónico"
+            class="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div class="mb-6 relative">
+          <label for="login-password" class="sr-only">Contraseña</label>
+          <input
+            type="password"
+            id="login-password"
+            name="password"
+            placeholder="Contraseña"
+            class="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          />
+          <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600">
+            <img src="/assets/icons/eye-icon.svg" alt="Mostrar" id="eye-icon" class="w-5 h-5"/>
+          </button>
+        </div>
+        
+        <button 
+          type="submit"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+        >
+          Iniciar Sesión
+        </button>
+        <div class="text-center mt-4">
+          <a
+            href="/forgot-password"
+            class="text-white hover:text-blue-700 text-sm"
+          >
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+      </form>
+    </main>
+    <footer>
+      <div class="text-center mb-4 mt-6">
+        <p class="text-gray-600">- O -</p>
+      </div>
+      <div class="flex flex-col gap-4 mb-6">
+        <button 
+          id="google"
+          type="button"
+          class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full w-full md:w-auto"
+        >
+          <img
+            src="assets/img/google.webp"
+            alt="Google icon"
+            class="w-6 h-6 inline-block"
+          />
+          Iniciar con Google
+        </button>
+        
+      </div>
+    </footer>
+  </section>
+</div>
+
+<script>
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { app } from '../firebase/client';
+
+const auth = getAuth(app);
+
+
+const handleEmailLogin = async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const idToken = await userCredential.user.getIdToken();
+
+
+    const response = await fetch("/api/auth/signin", {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      window.location.assign("/home");
+    } else {
+      console.error("Error:", data);
+    }
+  } catch (error) {
+    console.error("Error al iniciar sesión:", error);
+  }
+};
+
+const handleGoogleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+   
+    const userCredential = await signInWithPopup(auth, provider);
+    const idToken = await userCredential.user.getIdToken();
+
+    const response = await fetch("/api/auth/signin", {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    
+    if (response.ok) {
+      window.location.assign("/home");
+    } else {
+      console.error("Error:", data);
+    }
+  } catch (error) {
+    console.error("Error al iniciar sesión con Google:", error);
+  }
+};
+
+const initAuthEvents = () => {
+  const form = document.getElementById('loginForm');
+  if (form) {
+    form.addEventListener('submit', handleEmailLogin);
+  }
+
+  const googleSignin = document.querySelector("#google");
+  if (googleSignin) {
+    googleSignin.addEventListener('click', handleGoogleLogin);
+  }
+};
+
+document.addEventListener('DOMContentLoaded', initAuthEvents);
+
+</script> -->

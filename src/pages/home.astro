@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/NavBar.astro';
+import AlertButton from '../components/AlertButton.jsx';
+import EmergencyMenu from '@/components/EmergencyMenu';
+import ThemeIcon from '../components/DarkModeToggle.astro';
+import App from '../components/ChatApp.jsx';
+
+// TODO: Hacer llamada para obtener el communityId del usuario
+
+// const communityId = 9182309816;
+---
+
+<!-- <Layout title="AlertAR - Inicio.">
+  <ThemeIcon />
+  <main class="flex justify-center items-center min-h-screen">
+    <Navbar />
+    <div class="container w-4/5 md:mt-0 mb-28">
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 grid-rows-3 md:grid-rows-1 gap-1 items-center justify-center md:grid-areas-layout"
+      > -->
+        <!-- Boton de Reporte -->
+        <!-- <a
+          href="/reports"
+          class="bg-blue-500 text-white flex flex-col items-center justify-center w-full h-28 md:h-44 rounded-full shadow-2xl transition-all duration-200 hover:shadow-lg md:row-start-1 md:col-start-1"
+        >
+          <img
+            class="w-10 h-10 md:w-14 md:h-14"
+            src="../assets/icons/report-icon.webp"
+            alt="logo Reporte"
+          />
+          <span class="mt-2 md:mt-3 text-sm md:text-base">Reportes</span>
+        </a> -->
+
+        
+        <!-- Boton de Chat -->
+        <!-- <a
+        href={`/chat/${communityId}`}
+        class="bg-green-500 text-white flex flex-col items-center justify-center w-full h-28 md:h-44 rounded-full shadow-2xl transition-all duration-200 hover:shadow-lg z--10 md:row-start-1 md:col-start-3"
+        >
+        <img
+        class="w-10 h-10 md:w-14 md:h-14"
+        src="../assets/icons/chat-icon.webp"
+        alt="logo Chat"
+        />
+        <span class="mt-2 md:mt-3 text-sm md:text-base">Chat Vecinal</span>
+      </a> -->
+      <!-- Boton de Alerta -->
+      <!-- <AlertButton client:load />
+      </div>
+    </div>
+    <EmergencyMenu client:load />
+  </main>
+</Layout> -->

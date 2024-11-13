@@ -1,0 +1,61 @@
+<div class="flex flex-col min-h-screen">
+  <div class="flex flex-col items-center justify-center flex-grow p-4">
+    <div
+      class="max-w-md w-full mx-4 p-8 bg-transparent dark:bg-transparent rounded-none shadow-none"
+    >
+      <!-- Logo -->
+      <div class="flex justify-center mb-6 z-0">
+        <img src="assets/img/logo.webp" alt="AlertAR Logo" class="w-24 h-24" />
+      </div>
+
+      <h1 class="text-3xl font-bold text-center text-black dark:text-gray-100 mb-4">
+        Alert<span class="relative">AR<img src="../../public/assets/img/argentina2.webp" class="flag-image" alt="Bandera Argentina"></span>
+      </h1>
+      <h2
+        class="text-lg font-medium text-center text-gray-700 dark:text-gray-300 mb-8"
+      >
+        Tu barrio seguro
+      </h2>
+
+      <div class="flex flex-col items-center gap-4">
+        <button
+          class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-48"
+          id="openLoginModalBtn"
+        >
+          Iniciar Sesión
+        </button>
+        <button
+          class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-48"
+          id="openRegisterModalBtn"
+        >
+          Registrarse
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-600 dark:text-gray-300 p-4">
+    Examen Alarma con Chat en tiempo real - 2024 <br />
+    Integrantes: Alexis, Agustín, Marcos, Rodrigo <br />
+  </footer>
+</div>
+
+<script src="/scripts/modal.js" defer></script>
+
+<style>
+ .flag-image {
+  position: absolute;
+  width: 4rem; 
+  height: auto;
+  left: 1em; 
+  top: 50%;
+  transform: translateY(-90%) rotate(25deg); 
+  opacity: 0.6;
+  z-index: -1; 
+}
+
+
+
+</style>
+<script src="/scripts/modal.js" defer></script>

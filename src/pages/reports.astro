@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/NavBar.astro';
+import Card from '../components/ReportCard.astro';
+---
+
+<Layout title="AlertAR - Reportes">
+    <main class="flex flex-col justify-center items-center min-h-screen pt-16 pb-16">
+        <Navbar />
+        <nav class="absolute top-4 left-4">
+          <a
+            href="/home"
+            class="text-blue-200 dark:text-blue-300 font-semibold hover:no-underline"
+          >
+            <span class="mr-2 text-lg">&larr;</span> Volver
+          </a>
+        </nav>
+        <div class="container mx-auto p-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <Card title="Reporte de Actividad" description="Actividad inusual detectada en el barrio." date="2024-09-20" />
+              <Card title="Alerta de Seguridad" description="Se ha reportado un robo en la calle principal lorem ipsum dolor sit amet lorem ipsum dolor sit amet." date="2024-09-19" />
+              <Card title="Aviso Meteorológico" description="Se esperan fuertes lluvias en las próximas horas." date="2024-09-18" />
+              <Card title="Reunión Comunitaria" description="Únete a la reunión sobre la seguridad del barrio." date="2024-09-17" />
+            </div>
+          </div>
+        </div>
+      </main>
+</Layout>

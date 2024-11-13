@@ -1,0 +1,142 @@
+.slide-in {
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out, transform 0.5s ease-out;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(10px); 
+    overflow: hidden;
+  }
+  
+  .slide-in-open {
+    max-height: 400px; 
+    opacity: 1;
+    transform: translateY(0); 
+  }
+  
+  
+  
+  .message {
+    margin-bottom: 20px;
+  }
+  
+  .message.you {
+    text-align: right;
+  }
+  
+  .message-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  
+  .message-text {
+    background-color: #e0e7ff;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .message.you .message-text {
+    background-color: #b2c5ff;
+  }
+  
+  .message-image {
+    max-width: 150px;
+    border-radius: 10px;
+  }
+  
+  .input-container {
+    display: flex;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+  
+  .input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    margin-right: 10px;
+  }
+  
+  .input-container button {
+    padding: 10px 20px;
+    background-color: #4a6ef5;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+  }
+  
+  .input-container button:hover {
+    background-color: #3b58c9;
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh; 
+  }
+  
+  .chat-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px); 
+  }
+  
+  
+  .message-container {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .message-content {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .sent {
+    justify-content: flex-end;
+  }
+  
+  .received {
+    justify-content: flex-start;
+  }
+  
+  .input-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  @media (min-width: 1024px) {
+    .chat-box {
+      max-height: calc(100vh - 150px);
+      padding-top: 3em;
+  }
+  }
+  
+  .received {
+    justify-content: flex-start;
+  }
+  
+  .input-container {
+    display: flex;
+    gap: 10px;
+  }
+  
