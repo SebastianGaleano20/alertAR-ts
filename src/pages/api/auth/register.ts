@@ -1,6 +1,7 @@
 import { getAuth } from "firebase-admin/auth"
 import { app } from "@/firebase/server"
 import type { APIRoute } from "astro"
+import type { FirebaseAuthError } from "@/types/auth"
 
 export const POST: APIRoute = async ({ request, redirect }) => {
     const auth = getAuth(app)
@@ -24,16 +25,15 @@ export const POST: APIRoute = async ({ request, redirect }) => {
             password,
             displayName: name,
         })
-    } catch (error: any) {
+    } catch (error) {
         console.log(error)
 
-        if (error.code === "auth/email-already-exists") {
+        if ((error as FirebaseAuthError).code === "auth/email-already-exists") {
             return new Response(
                 "Ya existe un usuario con este correo",
                 { status: 400 }
             )
         }
-
 
         return new Response(
             "Algo salió mal",
