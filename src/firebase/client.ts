@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import type { FirebaseOptions } from "firebase/app";
 
-const firebaseConfig = {
+const firebaseConfig: FirebaseOptions = {
     apiKey: "AIzaSyCdgsutSpoFtdtrel-DAoQaBhIrCkIWWOE",
     authDomain: "alertar-app.firebaseapp.com",
     projectId: "alertar-app",
