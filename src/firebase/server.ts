@@ -1,8 +1,6 @@
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import type{ ServiceAccount} from 'firebase-admin'
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { getFirestore } from "firebase-admin/firestore";
 
 const activeApps = getApps();
 const serviceAccount = {
@@ -31,3 +29,4 @@ const initApp = () => {
 };
 
 export const app = activeApps.length === 0 ? initApp() : activeApps[0];
+export const db = getFirestore(app);

@@ -1,4 +1,4 @@
-import { db } from "../../../firebase/client";
+import { db } from "src/firebase/server";
 import { updateDoc, doc as firestoreDoc } from "firebase/firestore";
 import type { APIRoute } from "astro";
 
@@ -16,9 +16,9 @@ export const PUT: APIRoute = async ({ request, params }): Promise<Response> => {
     const { communityId }: RequestBody = await request.json();
 
     try {
-      const userDoc = firestoreDoc(db, "users", userId); 
-      await updateDoc(userDoc, { communityId });
-
+      const userRef = db.collection("users");
+      await userRef.doc(userId as string).update({ communityId });
+      
       return new Response(
         JSON.stringify({ message: "Usuario actualizado con éxito" }),
         { status: 200 }
@@ -40,7 +40,7 @@ export const GET: APIRoute = async ({ params }): Promise<Response> => {
     const { userId } = params;
 
     try {
-      const userDoc = await firestoreDoc(db, "users", userId).get(); // Método correcto para Firestore v9
+      const userDoc = await firestoreDoc(db, "users", userId).get(); 
       const data = userDoc.data();
 
       if (!data) {
