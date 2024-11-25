@@ -1,29 +1,36 @@
 ---
-// import Layout from '../layouts/Layout.astro';
+ import Layout from '../layouts/Layout.astro';
 
-// const comunidades = [
-//   {
-//     id: 1,
-//     nombre: 'Comunidad de Palermo',
-//     codigoPostal: '1425',
-//     descripcion: 'Comunidad activa en Palermo, Buenos Aires.',
-//   },
-//   {
-//     id: 2,
-//     nombre: 'Comunidad de Belgrano',
-//     codigoPostal: '1428',
-//     descripcion: 'Vecinos de Belgrano.',
-//   },
-//   {
-//     id: 3,
-//     nombre: 'Comunidad de Recoleta',
-//     codigoPostal: '1425',
-//     descripcion: 'Grupo de seguridad vecinal en Recoleta.',
-//   },
-// ];
+interface Comunidad {
+  id: number;
+  nombre: string;
+  codigoPostal: string;
+  descripcion: string;
+}
+
+const comunidades: Comunidad[] = [
+  {
+    id: 1,
+    nombre: 'Comunidad de Palermo',
+    codigoPostal: '1425',
+    descripcion: 'Comunidad activa en Palermo, Buenos Aires.',
+  },
+  {
+    id: 2,
+    nombre: 'Comunidad de Belgrano',
+    codigoPostal: '1428',
+    descripcion: 'Vecinos de Belgrano.',
+  },
+  {
+    id: 3,
+    nombre: 'Comunidad de Recoleta',
+    codigoPostal: '1425',
+    descripcion: 'Grupo de seguridad vecinal en Recoleta.',
+  },
+];
 ---
 
-<!-- <Layout title="AlertAR - Unirse a una Comunidad.">
+ <Layout title="AlertAR - Unirse a una Comunidad.">
   <div
     class="flex flex-col min-h-screen bg-gradient-to-b from-blue-300 to-blue-700 dark:bg-gradient-to-b dark:from-blue-800 dark:to-black"
   >
@@ -75,13 +82,16 @@
 </Layout>
 
 <script>
-  const buttons = document.querySelectorAll('button');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('button');
 
-  const handleJoinCommunity = async (event) => {
+  const handleJoinCommunity = async (event: Event): Promise<void> => {
     event.preventDefault();
-    const communityId = event.target.id;
+    const target = event.target as HTMLButtonElement;
+    const communityId = target.id;
 
     // TODO: Obtener el userId del usuario actual mediante Firebase Auth
+    const userId = "replace-with-user-id"; // Replace with actual logic to fetch userId
+
     const response = await fetch(`/api/user/${userId}`, {
       method: 'PUT',
       headers: {
@@ -104,4 +114,4 @@
   buttons.forEach((button) => {
     button.addEventListener('click', handleJoinCommunity);
   });
-</script> -->
+</script> 
