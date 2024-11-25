@@ -6,9 +6,9 @@
     "skipLibCheck": true,
     "paths": {
       "src/*": ["src/*"],
-      "astro/*": ["node_modules/astro/dist/*"],  // Configura la ruta para Astro
-      "firebase/*": ["node_modules/firebase/*"],  // Configura la ruta para Firebase
-      "firebase-admin/*": ["node_modules/firebase-admin/*"] // Configura la ruta para firebase-admin
+      "astro/*": ["node_modules/astro/dist/*"],
+      "firebase/*": ["node_modules/firebase/*"],
+      "firebase-admin": ["node_modules/firebase-admin"]  // Aquí eliminamos el patrón '*'
     },
     "types": ["astro/client"],
     "lib": ["ES2015", "DOM"],
@@ -17,6 +17,12 @@
     "moduleResolution": "Node",
     "strict": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx"
+, "src/pages/home.astro"  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
