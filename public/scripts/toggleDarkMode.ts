@@ -1,56 +1,35 @@
-// Función para alternar el modo oscuro
-const toggleDarkMode = (): void => {
-    document.documentElement.classList.toggle("dark");
+// Definimos una interfaz para la configuración de tema
+interface ThemeConfig {
+    theme: "dark" | "light";
+    toggleButton: HTMLInputElement | null;
+  }
   
-    const isDarkMode = document.documentElement.classList.contains("dark");
+  // Función para cambiar entre modos claros y oscuros
+  const toggleDarkMode = (config: ThemeConfig): void => {
+    document.documentElement.classList.toggle("dark");
+    const isDarkMode: boolean = document.documentElement.classList.contains("dark");
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    if (config.toggleButton) config.toggleButton.checked = isDarkMode;
   };
   
-  // Selección del botón para alternar el tema
-  const themeToggle = document.getElementById("themeToggle") as HTMLInputElement | null;
-  
-  if (themeToggle) {
-    themeToggle.addEventListener("click", toggleDarkMode);
+  // Inicializamos el botón de cambio de tema
+  const themeToggleButton = document.getElementById("themeToggle") as HTMLInputElement | null;
+  if (themeToggleButton) {
+    themeToggleButton.addEventListener("click", () => toggleDarkMode({ theme: "light", toggleButton: themeToggleButton }));
   }
   
   // Aplicar el tema guardado en localStorage al cargar la página
   const savedTheme = localStorage.getItem("theme");
+  const config: ThemeConfig = {
+    theme: savedTheme === "dark" ? "dark" : "light",
+    toggleButton: themeToggleButton,
+  };
   
-  if (savedTheme === "dark") {
+  if (config.theme === "dark") {
     document.documentElement.classList.add("dark");
-    const themeToggleElement = document.getElementById("themeToggle") as HTMLInputElement | null;
-    if (themeToggleElement) {
-      themeToggleElement.checked = true;
-    }
+    if (config.toggleButton) config.toggleButton.checked = true;
   } else {
     document.documentElement.classList.remove("dark");
-    const themeToggleElement = document.getElementById("themeToggle") as HTMLInputElement | null;
-    if (themeToggleElement) {
-      themeToggleElement.checked = false;
-    }
+    if (config.toggleButton) config.toggleButton.checked = false;
   }
   
-
-
-
-
-
-// const toggleDarkMode = () => {
-//   document.documentElement.classList.toggle("dark");
-//   const isDarkMode = document.documentElement.classList.contains("dark");
-//   localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-// };
-
-// document
-//   .getElementById("themeToggle")
-//   .addEventListener("click", toggleDarkMode);
-
-// // Aplicar el tema guardado en localStorage al cargar la página
-// const savedTheme = localStorage.getItem("theme");
-// if (savedTheme === "dark") {
-//   document.documentElement.classList.add("dark");
-//   document.getElementById("themeToggle").checked = true;
-// } else {
-//   document.documentElement.classList.remove("dark");
-//   document.getElementById("themeToggle").checked = false;
-// }

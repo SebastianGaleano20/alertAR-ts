@@ -1,39 +1,31 @@
-document
-  .getElementById("reset-password-form")
-  ?.addEventListener("submit", function (event: Event) {
-    // Asegúrate de que los inputs sean del tipo HTMLInputElement
-    const passwordInput = document.getElementById("password") as HTMLInputElement | null;
-    const confirmPasswordInput = document.getElementById("confirm-password") as HTMLInputElement | null;
-    const errorMessage = document.getElementById("error-message") as HTMLElement | null;
-
-    if (!passwordInput || !confirmPasswordInput || !errorMessage) {
-      // Si no se encuentran los elementos, no hacer nada
-      console.error("Form elements not found.");
-      return;
-    }
-
-    const password = passwordInput.value;
-    const confirmPassword = confirmPasswordInput.value;
-
-    if (password !== confirmPassword) {
-      event.preventDefault(); // Evitar envío del formulario
-      errorMessage.style.display = "block"; // Mostrar el mensaje de error
-    } else {
-      errorMessage.style.display = "none"; // Ocultar el mensaje de error
-    }
-  });
-
+// Definimos una interfaz para el formulario de restablecimiento de contraseña
+interface ResetPasswordFormElements {
+    form: HTMLFormElement;
+    passwordInput: HTMLInputElement;
+    confirmPasswordInput: HTMLInputElement;
+    errorMessage: HTMLElement;
+  }
   
-// document
-//   .getElementById("reset-password-form")
-//   .addEventListener("submit", function (event) {
-//     const password = document.getElementById("password").value;
-//     const confirmPassword = document.getElementById("confirm-password").value;
-
-//     if (password !== confirmPassword) {
-//       event.preventDefault();
-//       document.getElementById("error-message").style.display = "block";
-//     } else {
-//       document.getElementById("error-message").style.display = "none";
-//     }
-//   });
+  // Obtenemos los elementos del formulario y los agrupamos en un objeto de tipo ResetPasswordFormElements
+  const elements: ResetPasswordFormElements | null = {
+    form: document.getElementById("reset-password-form") as HTMLFormElement,
+    passwordInput: document.getElementById("password") as HTMLInputElement,
+    confirmPasswordInput: document.getElementById("confirm-password") as HTMLInputElement,
+    errorMessage: document.getElementById("error-message") as HTMLElement,
+  };
+  
+  // Verificamos que todos los elementos existan antes de agregar el event listener
+  if (elements && elements.form && elements.passwordInput && elements.confirmPasswordInput && elements.errorMessage) {
+    elements.form.addEventListener("submit", function (event: SubmitEvent): void {
+      const password = elements.passwordInput.value;
+      const confirmPassword = elements.confirmPasswordInput.value;
+  
+      if (password !== confirmPassword) {
+        event.preventDefault();
+        elements.errorMessage.style.display = "block";
+      } else {
+        elements.errorMessage.style.display = "none";
+      }
+    });
+  }
+  
