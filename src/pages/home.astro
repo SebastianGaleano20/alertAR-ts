@@ -1,5 +1,5 @@
 ---
-import { communityId } from './home'; 
+import { communityId } from '../types/pages/home'; 
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/NavBar.astro';
 import AlertButton from '../components/AlertButton.jsx';
@@ -26,9 +26,9 @@ import ThemeIcon from '../components/DarkModeToggle.astro';
         </a>
 
         <!-- Botón de Alerta -->
-        <AlertButton client:load />
+        <AlertButton />
       </div>
     </div>
-    <EmergencyMenu client:load />
+    <EmergencyMenu />
   </main>
 </Layout>
