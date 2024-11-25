@@ -6,6 +6,8 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "strict": true,
+    "jsx": "react-jsx",
+    "types": ["react"],
     "paths": {
       "@/*": [
         "./src/*"

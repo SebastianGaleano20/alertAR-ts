@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "../layouts/styles.css";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import {
   getFirestore,
   onSnapshot,
@@ -12,27 +12,33 @@ import {
 } from "firebase/firestore";
 import { auth, app } from "../firebase/client";
 import type { AppProps } from "../types/chat/index";
+import React from "react";
+import { Message } from "firebase-admin/messaging";
 
 const db = getFirestore(app);
 
 function App({ communityId }: AppProps) {
-  const [user, setUser] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
-  const chatEndRef = useRef(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [newMessage, setNewMessage] = useState<string>("");
+  const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const q = query(collection(db, "messages"), orderBy("timestamp"));
+    // Usar communityId para crear una subcolección específica para cada comunidad
+    const q = query(
+      collection(db, `communities/${communityId}/messages`),
+      orderBy("timestamp")
+    );
+
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      setMessages(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      );
+      const messagesData: Message[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data() as MessageData,
+      }));
+      setMessages(messagesData);
     });
     return unsubscribe;
-  }, []);
+  }, [communityId]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -50,12 +56,14 @@ function App({ communityId }: AppProps) {
 
   const sendMessage = async () => {
     if (newMessage.trim() === "") return;
-    await addDoc(collection(db, "messages"), {
+    // Usar communityId al añadir nuevos mensajes
+    await addDoc(collection(db, `communities/${communityId}/messages`), {
       uid: user.uid,
       photoURL: user.photoURL,
       displayName: user.displayName,
       text: newMessage,
       timestamp: serverTimestamp(),
+      communityId, // Opcional: añadir referencia a la comunidad en el mensaje
     });
     setNewMessage("");
   };
