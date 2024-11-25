@@ -2,7 +2,6 @@ import { db } from "src/firebase/server";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import type { APIRoute } from "astro";
 
-
 interface RequestBody {
   communityId: string;
 }

@@ -5,23 +5,21 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+      "astro/*": ["node_modules/astro/dist/*"],  // Configura la ruta para Astro
+      "firebase/*": ["node_modules/firebase/*"],  // Configura la ruta para Firebase
+      "firebase-admin/*": ["node_modules/firebase-admin/*"] // Configura la ruta para firebase-admin
     },
-    "types": ["astro/client"],  
+    "types": ["astro/client"],
     "lib": ["ES2015", "DOM"],
     "target": "ES2015",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "strict": true,
+    "strict": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"]
 }
-
-
-
-
-
 
 
 
