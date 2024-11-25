@@ -1,8 +1,6 @@
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import type{ ServiceAccount} from 'firebase-admin'
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 const activeApps = getApps();
 const serviceAccount = {

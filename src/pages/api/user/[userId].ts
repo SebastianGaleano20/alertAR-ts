@@ -1,4 +1,4 @@
-import { db } from "../../../firebase/client";
+import { db } from "../../../firebase/server";
 import { updateDoc, doc as firestoreDoc } from "firebase/firestore";
 import type { APIRoute } from "astro";
 
