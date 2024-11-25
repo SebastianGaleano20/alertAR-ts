@@ -2,6 +2,7 @@ import { db } from "src/firebase/server";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import type { APIRoute } from "astro";
 
+
 interface RequestBody {
   communityId: string;
 }
@@ -10,9 +11,9 @@ interface Params {
   userId: string;
 }
 
-export const PUT: APIRoute = async ({ request, params }): Promise<Response> => {
+export const PUT: APIRoute = async ({ request, params }: { request: Request; params: Params }): Promise<Response> => {
   try {
-    const { userId } = params;
+    const { userId } = params; 
     const { communityId }: RequestBody = await request.json();
 
     if (!userId || !communityId) {
@@ -38,9 +39,9 @@ export const PUT: APIRoute = async ({ request, params }): Promise<Response> => {
   }
 };
 
-export const GET: APIRoute = async ({ params }): Promise<Response> => {
+export const GET: APIRoute = async ({ params }: { params: Params }): Promise<Response> => {
   try {
-    const { userId } = params;
+    const { userId } = params; 
 
     if (!userId) {
       return new Response(
