@@ -1,64 +1,81 @@
-import { db } from "../../../firebase/server";
-import { updateDoc, doc as firestoreDoc } from "firebase/firestore";
-import type { APIRoute } from "astro";
+import { db } from "src/firebase/server";
+import type { APIRoute, APIContext } from "astro";
 
 interface RequestBody {
   communityId: string;
 }
 
 interface Params {
-  userId: string;
+  userId?: string;
 }
+const validateInput = (userId?: string, communityId?: string): boolean => {
+  return !!(userId && communityId);
+};
 
-export const PUT: APIRoute = async ({ request, params }): Promise<Response> => {
-  const handlePut = async (): Promise<Response> => {
-    const { userId } = params;
+export const PUT: APIRoute = async ({
+  request,
+  params,
+}: APIContext): Promise<Response> => {
+  try {
+    const { userId } = params as Params;
     const { communityId }: RequestBody = await request.json();
 
-    try {
-      const userDoc = firestoreDoc(db, "users", userId); 
-      await updateDoc(userDoc, { communityId });
-
+    if (!validateInput(userId, communityId)) {
       return new Response(
-        JSON.stringify({ message: "Usuario actualizado con éxito" }),
-        { status: 200 }
-      );
-    } catch (error) {
-      console.error("Error al actualizar usuario:", error);
-      return new Response(
-        JSON.stringify({ message: "Error al actualizar usuario" }),
-        { status: 500 }
+        JSON.stringify({ message: "Faltan datos requeridos" }),
+        { status: 400 }
       );
     }
-  };
+    if (!userId) {
+      return new Response(JSON.stringify({ message: "userId no es string" }), {
+        status: 400,
+      });
+    }
+    const userRef = db.collection("users").doc(userId);
+    await userRef.update({ communityId });
 
-  return handlePut();
+    return new Response(
+      JSON.stringify({ message: "Usuario actualizado con éxito" }),
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error al actualizar usuario:", error);
+    return new Response(
+      JSON.stringify({ message: "Error al actualizar usuario" }),
+      { status: 500 }
+    );
+  }
 };
 
-export const GET: APIRoute = async ({ params }): Promise<Response> => {
-  const handleGet = async (): Promise<Response> => {
-    const { userId } = params;
+export const GET: APIRoute = async ({
+  params,
+}: APIContext): Promise<Response> => {
+  try {
+    const { userId } = params as Params;
 
-    try {
-      const userDoc = await firestoreDoc(db, "users", userId).get(); // Método correcto para Firestore v9
-      const data = userDoc.data();
-
-      if (!data) {
-        return new Response(JSON.stringify({ message: "Usuario no encontrado" }), {
-          status: 404,
-        });
-      }
-
-      return new Response(JSON.stringify(data), { status: 200 });
-    } catch (error) {
-      console.error("Error al obtener usuario:", error);
+    if (!userId) {
       return new Response(
-        JSON.stringify({ message: "Error al obtener usuario" }),
-        { status: 500 }
+        JSON.stringify({ message: "Faltan datos requeridos" }),
+        { status: 400 }
       );
     }
-  };
 
-  return handleGet();
+    const userRef = db.collection("users").doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      return new Response(
+        JSON.stringify({ message: "Usuario no encontrado" }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(JSON.stringify(userDoc.data()), { status: 200 });
+  } catch (error) {
+    console.error("Error al obtener usuario:", error);
+    return new Response(
+      JSON.stringify({ message: "Error al obtener usuario" }),
+      { status: 500 }
+    );
+  }
 };
-

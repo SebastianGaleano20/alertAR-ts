@@ -1,18 +1,28 @@
 {
-  "extends": "astro/tsconfigs/strict", 
   "compilerOptions": {
-    "types": ["cypress"],
-    "moduleResolution": "node",
+    "baseUrl": ".",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "strict": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
+      "@/*": ["src/*"],
+      "astro/*": ["node_modules/astro/dist/*"],
+      "firebase/*": ["node_modules/firebase/*"],
+      "firebase-admin": ["node_modules/firebase-admin"] // Aquí eliminamos el patrón '*'
+    },
+    "types": ["astro/client"],
+    "lib": ["ES2015", "DOM"],
+    "target": "ES2015",
+    "module": "ESNext",
+    "moduleResolution": "Node"
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/pages/home.astro"
+  ],
   "exclude": ["node_modules"]
 }

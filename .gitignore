@@ -6,6 +6,7 @@ dist/
 
 # dependencies
 node_modules/
+.pnpm-debug.log
 
 # logs
 npm-debug.log*
@@ -22,3 +23,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
