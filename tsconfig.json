@@ -1,13 +1,17 @@
 {
-  "extends": "astro/tsconfigs/strict", 
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "src/*": [
-        "src/*"
-      ]
-    }
+      "src/*": ["src/*"]
+    },
+    "types": ["astro/client", "firebase"], // Agrega firebase para que TypeScript reconozca los tipos
+    "lib": ["ES2015", "DOM"], // Incluye ES2015 para soporte de Promises
+    "target": "ES2015", // Compatible con las versiones modernas de JavaScript
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"]
 }

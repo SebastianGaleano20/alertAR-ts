@@ -1,5 +1,5 @@
 import { db } from "src/firebase/server";
-import { updateDoc, doc as firestoreDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import type { APIRoute } from "astro";
 
 interface RequestBody {
@@ -11,54 +11,60 @@ interface Params {
 }
 
 export const PUT: APIRoute = async ({ request, params }): Promise<Response> => {
-  const handlePut = async (): Promise<Response> => {
+  try {
     const { userId } = params;
     const { communityId }: RequestBody = await request.json();
 
-    try {
-      const userRef = db.collection("users");
-      await userRef.doc(userId as string).update({ communityId });
-      
+    if (!userId || !communityId) {
       return new Response(
-        JSON.stringify({ message: "Usuario actualizado con éxito" }),
-        { status: 200 }
-      );
-    } catch (error) {
-      console.error("Error al actualizar usuario:", error);
-      return new Response(
-        JSON.stringify({ message: "Error al actualizar usuario" }),
-        { status: 500 }
+        JSON.stringify({ message: "Faltan datos requeridos" }),
+        { status: 400 }
       );
     }
-  };
 
-  return handlePut();
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, { communityId });
+
+    return new Response(
+      JSON.stringify({ message: "Usuario actualizado con éxito" }),
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error al actualizar usuario:", error);
+    return new Response(
+      JSON.stringify({ message: "Error al actualizar usuario" }),
+      { status: 500 }
+    );
+  }
 };
 
 export const GET: APIRoute = async ({ params }): Promise<Response> => {
-  const handleGet = async (): Promise<Response> => {
+  try {
     const { userId } = params;
 
-    try {
-      const userDoc = await firestoreDoc(db, "users", userId).get(); 
-      const data = userDoc.data();
-
-      if (!data) {
-        return new Response(JSON.stringify({ message: "Usuario no encontrado" }), {
-          status: 404,
-        });
-      }
-
-      return new Response(JSON.stringify(data), { status: 200 });
-    } catch (error) {
-      console.error("Error al obtener usuario:", error);
+    if (!userId) {
       return new Response(
-        JSON.stringify({ message: "Error al obtener usuario" }),
-        { status: 500 }
+        JSON.stringify({ message: "Faltan datos requeridos" }),
+        { status: 400 }
       );
     }
-  };
 
-  return handleGet();
+    const userRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userRef);
+
+    if (!userDoc.exists()) {
+      return new Response(
+        JSON.stringify({ message: "Usuario no encontrado" }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(JSON.stringify(userDoc.data()), { status: 200 });
+  } catch (error) {
+    console.error("Error al obtener usuario:", error);
+    return new Response(
+      JSON.stringify({ message: "Error al obtener usuario" }),
+      { status: 500 }
+    );
+  }
 };
-

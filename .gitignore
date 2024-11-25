@@ -6,6 +6,7 @@ dist/
 
 # dependencies
 node_modules/
+.pnpm-debug.log
 
 # logs
 npm-debug.log*
