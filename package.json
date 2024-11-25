@@ -14,7 +14,6 @@
     "@astrojs/tailwind": "5.1.2",
     "@firebase/firestore": "4.7.5",
     "@types/firebase": "^3.2.3",
-    "@types/react": "^18.3.12",
     "astro": "4.16.13",
     "dotenv": "16.4.5",
     "firebase": "^11.0.2",
@@ -26,6 +25,8 @@
     "typescript": "5.7.2"
   },
   "devDependencies": {
-    "@types/node": "22.9.3"
+    "@types/node": "22.9.3",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1"
   }
 }
