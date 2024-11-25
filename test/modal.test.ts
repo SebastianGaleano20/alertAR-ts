@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { initializeModal, togglePasswordVisibility } from "../public/scripts/modal.ts";
+import { initializeModal, togglePasswordVisibility } from "@/src/scripts/modal.ts";
 
 describe("Modal Functions", () => {
   it("should open the modal when the open button is clicked", () => {

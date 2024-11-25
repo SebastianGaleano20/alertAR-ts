@@ -4,7 +4,7 @@ import {
     signInWithPopup,
     signInWithEmailAndPassword,
   } from 'firebase/auth';
-  import { app } from '../../src/firebase/client';
+  import { app } from '../firebase/client';
 
   const auth = getAuth(app);
   document.addEventListener('DOMContentLoaded', () => {
