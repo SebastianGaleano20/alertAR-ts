@@ -7,40 +7,53 @@ settings:
 importers:
 
   .:
+    importers:
+
+  .:
     dependencies:
-      '@astrojs/check':
-        specifier: ^0.9.4
-        version: 0.9.4(typescript@5.6.3)
-      '@astrojs/tailwind':
-        specifier: ^5.1.2
-        version: 5.1.2(astro@4.16.13(@types/node@22.9.3)(rollup@4.27.4)(typescript@5.6.3))(tailwindcss@3.4.15)
-      astro:
-        specifier: ^4.16.10
-        version: 4.16.13(@types/node@22.9.3)(rollup@4.27.4)(typescript@5.6.3)
-      dotenv:
-        specifier: ^16.4.5
-        version: 16.4.5
-      firebase:
-        specifier: ^11.0.2
-        version: 11.0.2
-      firebase-admin:
-        specifier: ^13.0.0
-        version: 13.0.1
-      react:
-        specifier: ^18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
-      react-icons:
+          '@astrojs/check':
+            specifier: ^0.9.4
+            version: 0.9.4(typescript@5.6.3)
+          '@astrojs/tailwind':
+            specifier: ^5.1.2
+            version: 5.1.2(astro@4.16.13(@types/node@22.9.3)(rollup@4.27.3)(typescript@5.6.3)(@types/node@22.9.3)(rollup@4.27.4)(typescript@5.6.3))(tailwindcss@3.4.15)
+      '@firebase/firestore':
+        specifier: ^4.7.5
+        version: 4.7.5(@firebase/app@0.10.16)
+          astro:
+            specifier: ^4.16.13
+            version: 4.16.13(@types/node@22.9.3)(rollup@4.27.3)(@types/node@22.9.3)(rollup@4.27.4)(typescript@5.6.3)
+          dotenv:
+            specifier: ^16.4.5
+            version: 16.4.5
+          firebase:
+            specifier: ^11.0.2
+            version: 11.0.2
+          firebase-admin:
+            specifier: ^13.0.0
+            version: 13.0.1
+          react:
+            specifier: ^18.3.1
+            version: 18.3.1
+          react-dom:
+            specifier: ^18.3.1
+            version: 18.3.1(react@18.3.1)
+          react-icons:
         specifier: ^5.3.0
         version: 5.3.0(react@18.3.1)
       tailwindcss:
-        specifier: ^3.4.14
-        version: 3.4.15
-      typescript:
-        specifier: ^5.6.3
-        version: 5.6.3
+            specifier: ^3.4.14
+            version: 3.4.15
+          typescript:
+            specifier: ^5.6.3
+            version: 5.6.3
+    devDependencies:
+      '@types/firebase':
+        specifier: ^3.2.3
+        version: 3.2.3
+      '@types/node':
+        specifier: ^22.9.3
+        version: 22.9.3
 
 packages:
 
@@ -779,6 +792,109 @@ packages:
       rollup:
         optional: true
 
+<<<<<<< HEAD
+  '@rollup/rollup-android-arm-eabi@4.27.3':
+    resolution: {integrity: sha512-EzxVSkIvCFxUd4Mgm4xR9YXrcp976qVaHnqom/Tgm+vU79k4vV4eYTjmRvGfeoW8m9LVcsAy/lGjcgVegKEhLQ==}
+    cpu: [arm]
+    os: [android]
+
+  '@rollup/rollup-android-arm64@4.27.3':
+    resolution: {integrity: sha512-LJc5pDf1wjlt9o/Giaw9Ofl+k/vLUaYsE2zeQGH85giX2F+wn/Cg8b3c5CDP3qmVmeO5NzwVUzQQxwZvC2eQKw==}
+    cpu: [arm64]
+    os: [android]
+
+  '@rollup/rollup-darwin-arm64@4.27.3':
+    resolution: {integrity: sha512-OuRysZ1Mt7wpWJ+aYKblVbJWtVn3Cy52h8nLuNSzTqSesYw1EuN6wKp5NW/4eSre3mp12gqFRXOKTcN3AI3LqA==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@rollup/rollup-darwin-x64@4.27.3':
+    resolution: {integrity: sha512-xW//zjJMlJs2sOrCmXdB4d0uiilZsOdlGQIC/jjmMWT47lkLLoB1nsNhPUcnoqyi5YR6I4h+FjBpILxbEy8JRg==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@rollup/rollup-freebsd-arm64@4.27.3':
+    resolution: {integrity: sha512-58E0tIcwZ+12nK1WiLzHOD8I0d0kdrY/+o7yFVPRHuVGY3twBwzwDdTIBGRxLmyjciMYl1B/U515GJy+yn46qw==}
+    cpu: [arm64]
+    os: [freebsd]
+
+  '@rollup/rollup-freebsd-x64@4.27.3':
+    resolution: {integrity: sha512-78fohrpcVwTLxg1ZzBMlwEimoAJmY6B+5TsyAZ3Vok7YabRBUvjYTsRXPTjGEvv/mfgVBepbW28OlMEz4w8wGA==}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@rollup/rollup-linux-arm-gnueabihf@4.27.3':
+    resolution: {integrity: sha512-h2Ay79YFXyQi+QZKo3ISZDyKaVD7uUvukEHTOft7kh00WF9mxAaxZsNs3o/eukbeKuH35jBvQqrT61fzKfAB/Q==}
+    cpu: [arm]
+    os: [linux]
+
+  '@rollup/rollup-linux-arm-musleabihf@4.27.3':
+    resolution: {integrity: sha512-Sv2GWmrJfRY57urktVLQ0VKZjNZGogVtASAgosDZ1aUB+ykPxSi3X1nWORL5Jk0sTIIwQiPH7iE3BMi9zGWfkg==}
+    cpu: [arm]
+    os: [linux]
+
+  '@rollup/rollup-linux-arm64-gnu@4.27.3':
+    resolution: {integrity: sha512-FPoJBLsPW2bDNWjSrwNuTPUt30VnfM8GPGRoLCYKZpPx0xiIEdFip3dH6CqgoT0RnoGXptaNziM0WlKgBc+OWQ==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rollup/rollup-linux-arm64-musl@4.27.3':
+    resolution: {integrity: sha512-TKxiOvBorYq4sUpA0JT+Fkh+l+G9DScnG5Dqx7wiiqVMiRSkzTclP35pE6eQQYjP4Gc8yEkJGea6rz4qyWhp3g==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rollup/rollup-linux-powerpc64le-gnu@4.27.3':
+    resolution: {integrity: sha512-v2M/mPvVUKVOKITa0oCFksnQQ/TqGrT+yD0184/cWHIu0LoIuYHwox0Pm3ccXEz8cEQDLk6FPKd1CCm+PlsISw==}
+    cpu: [ppc64]
+    os: [linux]
+
+  '@rollup/rollup-linux-riscv64-gnu@4.27.3':
+    resolution: {integrity: sha512-LdrI4Yocb1a/tFVkzmOE5WyYRgEBOyEhWYJe4gsDWDiwnjYKjNs7PS6SGlTDB7maOHF4kxevsuNBl2iOcj3b4A==}
+    cpu: [riscv64]
+    os: [linux]
+
+  '@rollup/rollup-linux-s390x-gnu@4.27.3':
+    resolution: {integrity: sha512-d4wVu6SXij/jyiwPvI6C4KxdGzuZOvJ6y9VfrcleHTwo68fl8vZC5ZYHsCVPUi4tndCfMlFniWgwonQ5CUpQcA==}
+    cpu: [s390x]
+    os: [linux]
+
+  '@rollup/rollup-linux-x64-gnu@4.27.3':
+    resolution: {integrity: sha512-/6bn6pp1fsCGEY5n3yajmzZQAh+mW4QPItbiWxs69zskBzJuheb3tNynEjL+mKOsUSFK11X4LYF2BwwXnzWleA==}
+    cpu: [x64]
+    os: [linux]
+
+  '@rollup/rollup-linux-x64-musl@4.27.3':
+    resolution: {integrity: sha512-nBXOfJds8OzUT1qUreT/en3eyOXd2EH5b0wr2bVB5999qHdGKkzGzIyKYaKj02lXk6wpN71ltLIaQpu58YFBoQ==}
+    cpu: [x64]
+    os: [linux]
+
+  '@rollup/rollup-win32-arm64-msvc@4.27.3':
+    resolution: {integrity: sha512-ogfbEVQgIZOz5WPWXF2HVb6En+kWzScuxJo/WdQTqEgeyGkaa2ui5sQav9Zkr7bnNCLK48uxmmK0TySm22eiuw==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@rollup/rollup-win32-ia32-msvc@4.27.3':
+    resolution: {integrity: sha512-ecE36ZBMLINqiTtSNQ1vzWc5pXLQHlf/oqGp/bSbi7iedcjcNb6QbCBNG73Euyy2C+l/fn8qKWEwxr+0SSfs3w==}
+    cpu: [ia32]
+    os: [win32]
+
+  '@rollup/rollup-win32-x64-msvc@4.27.3':
+    resolution: {integrity: sha512-vliZLrDmYKyaUoMzEbMTg2JkerfBjn03KmAw9CykO0Zzkzoyd7o3iZNam/TpyWNjNT+Cz2iO3P9Smv2wgrR+Eg==}
+    cpu: [x64]
+    os: [win32]
+
+  '@shikijs/core@1.23.1':
+    resolution: {integrity: sha512-NuOVgwcHgVC6jBVH5V7iblziw6iQbWWHrj5IlZI3Fqu2yx9awH7OIQkXIcsHsUmY19ckwSgUMgrqExEyP5A0TA==}
+
+  '@shikijs/engine-javascript@1.23.1':
+    resolution: {integrity: sha512-i/LdEwT5k3FVu07SiApRFwRcSJs5QM9+tod5vYCPig1Ywi8GR30zcujbxGQFJHwYD7A5BUqagi8o5KS+LEVgBg==}
+
+  '@shikijs/engine-oniguruma@1.23.1':
+    resolution: {integrity: sha512-KQ+lgeJJ5m2ISbUZudLR1qHeH3MnSs2mjFg7bnencgs5jDVPeJ2NVDJ3N5ZHbcTsOIh0qIueyAJnwg7lg7kwXQ==}
+
+  '@shikijs/types@1.23.1':
+    resolution: {integrity: sha512-98A5hGyEhzzAgQh2dAeHKrWW4HfCMeoFER2z16p5eJ+vmPeF6lZ/elEne6/UCU551F/WqkopqRsr1l2Yu6+A0g==}
+=======
   '@rollup/rollup-android-arm-eabi@4.27.4':
     resolution: {integrity: sha512-2Y3JT6f5MrQkICUyRVCw4oa0sutfAsgaSsb0Lmmy1Wi2y7X5vT9Euqw4gOsCyy0YfKURBg35nhUKZS4mDcfULw==}
     cpu: [arm]
@@ -880,6 +996,7 @@ packages:
 
   '@shikijs/types@1.23.1':
     resolution: {integrity: sha512-98A5hGyEhzzAgQh2dAeHKrWW4HfCMeoFER2z16p5eJ+vmPeF6lZ/elEne6/UCU551F/WqkopqRsr1l2Yu6+A0g==}
+>>>>>>> d3d8d3d56b578bfc7fc0e898eb8f7cc58bb24781
 
   '@shikijs/vscode-textmate@9.3.0':
     resolution: {integrity: sha512-jn7/7ky30idSkd/O5yDBfAnVt+JJpepofP/POZ1iMOxK59cOfqIgg/Dj0eFsjOTMw+4ycJN0uhZH/Eb0bs/EUA==}
@@ -924,6 +1041,13 @@ packages:
   '@types/express@4.17.21':
     resolution: {integrity: sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==}
 
+<<<<<<< HEAD
+  '@types/firebase@3.2.3':
+    resolution: {integrity: sha512-fId22ajZ7CkTMnm/FveFcEGb7Trv97JsUk1Dvc1vIFDiwpVSGKeTUyBOA2Tr2riXe53ZP526G9WDCrq3ulE7tw==}
+    deprecated: This is a stub types definition. firebase provides its own type definitions, so you do not need this installed.
+
+=======
+>>>>>>> d3d8d3d56b578bfc7fc0e898eb8f7cc58bb24781
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
@@ -3474,7 +3598,9 @@ snapshots:
     dependencies:
       '@grpc/proto-loader': 0.7.13
       '@types/node': 22.9.3
+      '@types/node': 22.9.3
 
+  '@grpc/proto-loader@0.7.13':
   '@grpc/proto-loader@0.7.13':
     dependencies:
       lodash.camelcase: 4.3.0
@@ -3692,6 +3818,7 @@ snapshots:
     optional: true
 
   '@shikijs/core@1.23.1':
+  '@shikijs/core@1.23.1':
     dependencies:
       '@shikijs/engine-javascript': 1.23.1
       '@shikijs/engine-oniguruma': 1.23.1
@@ -3701,16 +3828,19 @@ snapshots:
       hast-util-to-html: 9.0.3
 
   '@shikijs/engine-javascript@1.23.1':
+  '@shikijs/engine-javascript@1.23.1':
     dependencies:
       '@shikijs/types': 1.23.1
       '@shikijs/vscode-textmate': 9.3.0
       oniguruma-to-es: 0.4.1
 
   '@shikijs/engine-oniguruma@1.23.1':
+  '@shikijs/engine-oniguruma@1.23.1':
     dependencies:
       '@shikijs/types': 1.23.1
       '@shikijs/vscode-textmate': 9.3.0
 
+  '@shikijs/types@1.23.1':
   '@shikijs/types@1.23.1':
     dependencies:
       '@shikijs/vscode-textmate': 9.3.0
@@ -3746,12 +3876,14 @@ snapshots:
     dependencies:
       '@types/connect': 3.4.38
       '@types/node': 22.9.3
+      '@types/node': 22.9.3
 
   '@types/caseless@0.12.5':
     optional: true
 
   '@types/connect@3.4.38':
     dependencies:
+      '@types/node': 22.9.3
       '@types/node': 22.9.3
 
   '@types/cookie@0.6.0': {}
@@ -3765,6 +3897,7 @@ snapshots:
   '@types/express-serve-static-core@4.19.6':
     dependencies:
       '@types/node': 22.9.3
+      '@types/node': 22.9.3
       '@types/qs': 6.9.17
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -3776,6 +3909,15 @@ snapshots:
       '@types/qs': 6.9.17
       '@types/serve-static': 1.15.7
 
+<<<<<<< HEAD
+  '@types/firebase@3.2.3':
+    dependencies:
+      firebase: 11.0.2
+    transitivePeerDependencies:
+      - '@react-native-async-storage/async-storage'
+
+=======
+>>>>>>> d3d8d3d56b578bfc7fc0e898eb8f7cc58bb24781
   '@types/hast@3.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -3784,6 +3926,7 @@ snapshots:
 
   '@types/jsonwebtoken@9.0.7':
     dependencies:
+      '@types/node': 22.9.3
       '@types/node': 22.9.3
 
   '@types/long@4.0.2':
@@ -3802,6 +3945,7 @@ snapshots:
       '@types/unist': 3.0.3
 
   '@types/node@22.9.3':
+  '@types/node@22.9.3':
     dependencies:
       undici-types: 6.19.8
 
@@ -3813,6 +3957,7 @@ snapshots:
     dependencies:
       '@types/caseless': 0.12.5
       '@types/node': 22.9.3
+      '@types/node': 22.9.3
       '@types/tough-cookie': 4.0.5
       form-data: 2.5.2
     optional: true
@@ -3821,10 +3966,12 @@ snapshots:
     dependencies:
       '@types/mime': 1.3.5
       '@types/node': 22.9.3
+      '@types/node': 22.9.3
 
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
+      '@types/node': 22.9.3
       '@types/node': 22.9.3
       '@types/send': 0.17.4
 
@@ -3875,6 +4022,7 @@ snapshots:
       path-browserify: 1.0.1
       vscode-uri: 3.0.8
 
+  '@vscode/emmet-helper@2.11.0':
   '@vscode/emmet-helper@2.11.0':
     dependencies:
       emmet: 2.4.11
@@ -4171,6 +4319,7 @@ snapshots:
   cookie@0.7.2: {}
 
   cross-spawn@7.0.6:
+  cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
       shebang-command: 2.0.0
@@ -4211,7 +4360,9 @@ snapshots:
   dlv@1.1.3: {}
 
   dotenv@16.4.5: {}
+  dotenv@16.4.5: {}
 
+  dset@3.1.4: {}
   dset@3.1.4: {}
 
   duplexify@4.1.3:
@@ -4345,10 +4496,12 @@ snapshots:
       pkg-dir: 4.2.0
 
   firebase-admin@13.0.1:
+  firebase-admin@13.0.1:
     dependencies:
       '@fastify/busboy': 3.0.0
       '@firebase/database-compat': 2.0.1
       '@firebase/database-types': 1.0.7
+      '@types/node': 22.9.3
       '@types/node': 22.9.3
       farmhash-modern: 1.1.0
       google-auth-library: 9.15.0
@@ -4529,6 +4682,7 @@ snapshots:
       vfile-message: 4.0.2
 
   hast-util-from-parse5@8.0.2:
+  hast-util-from-parse5@8.0.2:
     dependencies:
       '@types/hast': 3.0.4
       '@types/unist': 3.0.3
@@ -4598,6 +4752,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
 
+  hastscript@9.0.0:
   hastscript@9.0.0:
     dependencies:
       '@types/hast': 3.0.4
@@ -4800,6 +4955,7 @@ snapshots:
       p-locate: 4.1.0
 
   lodash.camelcase@4.3.0: {}
+  lodash.camelcase@4.3.0: {}
 
   lodash.clonedeep@4.5.0: {}
 
@@ -4825,15 +4981,20 @@ snapshots:
       is-unicode-supported: 1.3.0
 
   long@5.2.3: {}
+  long@5.2.3: {}
 
   longest-streak@3.1.0: {}
+  longest-streak@3.1.0: {}
 
+  loose-envify@1.4.0:
   loose-envify@1.4.0:
     dependencies:
       js-tokens: 4.0.0
 
   lru-cache@10.4.3: {}
+  lru-cache@10.4.3: {}
 
+  lru-cache@5.1.1:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
@@ -4847,6 +5008,7 @@ snapshots:
       lodash.clonedeep: 4.5.0
       lru-cache: 6.0.0
 
+  magic-string@0.30.13:
   magic-string@0.30.13:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -5140,6 +5302,7 @@ snapshots:
       micromark-util-symbol: 2.0.1
 
   micromark-util-subtokenize@2.0.3:
+  micromark-util-subtokenize@2.0.3:
     dependencies:
       devlop: 1.1.0
       micromark-util-chunked: 2.0.1
@@ -5241,6 +5404,7 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
+  oniguruma-to-es@0.4.1:
   oniguruma-to-es@0.4.1:
     dependencies:
       emoji-regex-xs: 1.0.0
@@ -5347,6 +5511,8 @@ snapshots:
       yaml: 2.6.1
     optionalDependencies:
       postcss: 8.4.49
+    optionalDependencies:
+      postcss: 8.4.49
 
   postcss-nested@6.2.0(postcss@8.4.49):
     dependencies:
@@ -5402,10 +5568,13 @@ snapshots:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/node': 22.9.3
+      '@types/node': 22.9.3
       long: 5.2.3
 
   queue-microtask@1.2.3: {}
+  queue-microtask@1.2.3: {}
 
+  react-dom@18.3.1(react@18.3.1):
   react-dom@18.3.1(react@18.3.1):
     dependencies:
       loose-envify: 1.4.0
@@ -5417,9 +5586,11 @@ snapshots:
       react: 18.3.1
 
   react@18.3.1:
+  react@18.3.1:
     dependencies:
       loose-envify: 1.4.0
 
+  read-cache@1.0.0:
   read-cache@1.0.0:
     dependencies:
       pify: 2.3.0
@@ -5443,6 +5614,7 @@ snapshots:
 
   regex-utilities@2.3.0: {}
 
+  regex@5.0.2:
   regex@5.0.2:
     dependencies:
       regex-utilities: 2.3.0
@@ -5601,10 +5773,13 @@ snapshots:
       queue-microtask: 1.2.3
 
   safe-buffer@5.2.1: {}
+<<<<<<< HEAD
+=======
 
   scheduler@0.23.2:
     dependencies:
       loose-envify: 1.4.0
+>>>>>>> d3d8d3d56b578bfc7fc0e898eb8f7cc58bb24781
 
   section-matter@1.0.0:
     dependencies:
@@ -5648,6 +5823,7 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
+  shiki@1.23.1:
   shiki@1.23.1:
     dependencies:
       '@shikijs/core': 1.23.1
@@ -5805,6 +5981,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.6.3
 
+  tslib@2.8.1: {}
   tslib@2.8.1: {}
 
   type-fest@4.27.0: {}
@@ -6076,6 +6253,7 @@ snapshots:
     optional: true
 
   xxhash-wasm@1.1.0: {}
+  xxhash-wasm@1.1.0: {}
 
   y18n@5.0.8: {}
 
@@ -6097,6 +6275,14 @@ snapshots:
       yaml: 2.2.2
     optionalDependencies:
       prettier: 2.8.7
+
+  yaml@2.2.2: {}
+
+  yaml@2.6.1: {}
+
+  yargs-parser@21.1.1: {}
+
+  yargs@17.7.2:
 
   yaml@2.2.2: {}
 
