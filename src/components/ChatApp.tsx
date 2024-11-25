@@ -11,9 +11,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { auth, app } from "../firebase/client";
-import type { AppProps } from "../types/chat/index";
-import React from "react";
-import { Message } from "firebase-admin/messaging";
+import type { AppProps, Message, UserData } from "../types/chat/index";
 
 const db = getFirestore(app);
 
@@ -21,7 +19,7 @@ function App({ communityId }: AppProps) {
   const [user, setUser] = useState<User | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
-  const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatEndRef = useRef<HTMLTableSectionElement>(null);
 
   useEffect(() => {
     // Usar communityId para crear una subcolección específica para cada comunidad
@@ -33,7 +31,7 @@ function App({ communityId }: AppProps) {
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const messagesData: Message[] = snapshot.docs.map((doc) => ({
         id: doc.id,
-        data: doc.data() as MessageData,
+        data: doc.data() as UserData,
       }));
       setMessages(messagesData);
     });
@@ -57,6 +55,9 @@ function App({ communityId }: AppProps) {
   const sendMessage = async () => {
     if (newMessage.trim() === "") return;
     // Usar communityId al añadir nuevos mensajes
+    if (!user) {
+      return;
+    }
     await addDoc(collection(db, `communities/${communityId}/messages`), {
       uid: user.uid,
       photoURL: user.photoURL,
@@ -69,12 +70,12 @@ function App({ communityId }: AppProps) {
   };
 
   return (
-    <div className="flex flex-col justify-between py-10 min-h-screen">
+    <section className="flex flex-col justify-between py-10 min-h-screen">
       {user && (
-        <div className="w-full max-w-md mx-auto">
-          <div className="chat-box flex-grow overflow-y-auto max-h-[60vh]">
+        <article className="w-full max-w-md mx-auto">
+          <article className="chat-box flex-grow overflow-y-auto max-h-[60vh]">
             {messages.map((msg) => (
-              <div
+              <article
                 key={msg.id}
                 className={`message flex flex-col ${
                   msg.data.uid === user.uid ? "items-end" : "items-start"
@@ -83,7 +84,7 @@ function App({ communityId }: AppProps) {
                 <span className="text-xs text-gray-900 mb-1">
                   {msg.data.displayName}
                 </span>
-                <div
+                <article
                   className={`message flex flex-row p-3 gap-3 rounded-[20px] items-center ${
                     msg.data.uid === user.uid
                       ? "bg-blue-500 text-white"
@@ -96,12 +97,12 @@ function App({ communityId }: AppProps) {
                     alt="User Avatar"
                   />
                   <span>{msg.data.text}</span>
-                </div>
-              </div>
+                </article>
+              </article>
             ))}
-            <div ref={chatEndRef} />
-          </div>
-          <div className="input-container flex mt-4">
+            <article ref={chatEndRef} />
+          </article>
+          <article className="input-container flex mt-4">
             <input
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
@@ -119,10 +120,10 @@ function App({ communityId }: AppProps) {
             >
               Enviar
             </button>
-          </div>
-        </div>
+          </article>
+        </article>
       )}
-    </div>
+    </section>
   );
 }
 

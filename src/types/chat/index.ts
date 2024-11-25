@@ -1,18 +1,19 @@
-import { FieldValue } from 'firebase/firestore'
+import { User } from "firebase/auth";
+import { FieldValue } from "firebase/firestore";
 
-export interface AppProps{
+export interface AppProps {
   communityId: string | undefined;
 }
-export interface MessageData {
-  uid: string;
-  photoURL: string;
-  displayName: string;
-  text: string;
+export interface UserData {
+  uid: string | null;
+  photoURL: string | undefined;
+  displayName: string | null;
+  text: string | null;
   timestamp: FieldValue;
-  communityId: string;
+  communityId: string | null;
 }
 
 export interface Message {
   id: string;
-  data: MessageData;
+  data: UserData;
 }
