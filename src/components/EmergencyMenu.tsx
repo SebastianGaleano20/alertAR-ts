@@ -1,22 +1,33 @@
+// // imports necesarios
 // import React, { useState } from 'react';
 // import { FaPhoneAlt } from 'react-icons/fa';
 // import '../layouts/styles.css';
 
-// export default function EmergencyMenu() {
-//   const [isOpen, setIsOpen] = useState(false);
+// // Tipos de las propiedades
+// interface EmergencyMenuProps {}
+
+// const EmergencyMenu: React.FC<EmergencyMenuProps> = () => {
+//   const [isOpen, setIsOpen] = useState<boolean>(false);
 
 //   return (
-//     <div className="fixed left-1/2 transform -translate-x-1/2 z-50" style={{ bottom: '90px' }}>
+//     <div
+//       className="fixed left-1/2 transform -translate-x-1/2 z-50"
+//       style={{ bottom: '90px' }}
+//     >
+//       {/* Botón principal */}
 //       <button
 //         className="bg-cyan-500 rounded-full px-4 py-2 text-white text-xs flex items-center justify-center border border-black shadow-lg space-x-2"
 //         onClick={() => setIsOpen(!isOpen)}
 //       >
-//         <FaPhoneAlt /> 
-//         <span>Números de emergencia</span> 
+//         <FaPhoneAlt />
+//         <span>Números de emergencia</span>
 //       </button>
 
+//       {/* Lista de números de emergencia */}
 //       <div
-//         className={`absolute bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col space-y-2 slide-in ${isOpen ? 'slide-in-open' : ''} shadow-lg`}
+//         className={`absolute bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col space-y-2 ${
+//           isOpen ? 'slide-in-open' : ''
+//         } shadow-lg`}
 //       >
 //         {/* Opción Policía */}
 //         <a
@@ -47,4 +58,6 @@
 //       </div>
 //     </div>
 //   );
-// }
+// };
+
+// export default EmergencyMenu;
