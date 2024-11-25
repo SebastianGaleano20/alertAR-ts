@@ -1,108 +1,13 @@
 ---
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from '../firebase/client';
-import { app as serverApp } from '../firebase/server';
-import { getAuth as getServerAuth } from 'firebase-admin/auth';
-import type { DecodedIdToken } from 'firebase-admin/auth';
-import type { AstroGlobal } from 'astro'; 
+import { initAuthEvents } from '../types/auth'; // Ajusta la ruta según la ubicación de auth.ts
 
-
-interface AuthResponse {
-  ok: boolean;
-  data?: Record<string, unknown>;
-  error?: string;
-}
-
-// Configuración del servidor para verificar la sesión
-const serverAuth = getServerAuth(serverApp);
-
-async function checkSession(Astro: AstroGlobal): Promise<Response | void> {
-  if (Astro.cookies.has('__session')) {
-    const sessionCookie = Astro.cookies.get('__session')?.value;
-    try {
-      const decodedCookie: DecodedIdToken = await serverAuth.verifySessionCookie(sessionCookie!);
-      if (decodedCookie) {
-        return Astro.redirect('/chat'); // Devuelve el Response aquí
-      }
-    } catch (error) {
-      console.error("Error al verificar la cookie de sesión:", error);
-    }
-  }
-}
-
-
-// Script para manejar eventos de autenticación en el cliente
-const auth = getAuth(app);
-
-const handleEmailLogin = async (e: SubmitEvent): Promise<void> => {
-  e.preventDefault();
-
-  const email = (document.getElementById('login-email') as HTMLInputElement)?.value;
-  const password = (document.getElementById('login-password') as HTMLInputElement)?.value;
-
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const idToken = await userCredential.user.getIdToken();
-
-    const response = await fetch("/api/auth/signin", {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const data: AuthResponse = await response.json();
-
-    if (response.ok) {
-      window.location.assign("/home");
-    } else {
-      console.error("Error:", data.error);
-    }
-  } catch (error) {
-    console.error("Error al iniciar sesión:", error);
+// Ejecutamos el script al cargar el componente
+const initialiseAuth = (): void => {
+  if (typeof window !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', initAuthEvents);
   }
 };
-
-const handleGoogleLogin = async (): Promise<void> => {
-  const provider = new GoogleAuthProvider();
-  try {
-    const userCredential = await signInWithPopup(auth, provider);
-    const idToken = await userCredential.user.getIdToken();
-
-    const response = await fetch("/api/auth/signin", {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const data: AuthResponse = await response.json();
-
-    if (response.ok) {
-      window.location.assign("/home");
-    } else {
-      console.error("Error:", data.error);
-    }
-  } catch (error) {
-    console.error("Error al iniciar sesión con Google:", error);
-  }
-};
-
-const initAuthEvents = (): void => {
-  const form = document.getElementById('loginForm') as HTMLFormElement | null;
-  if (form) {
-    form.addEventListener('submit', handleEmailLogin);
-  }
-
-  const googleSignin = document.querySelector("#google") as HTMLButtonElement | null;
-  if (googleSignin) {
-    googleSignin.addEventListener('click', handleGoogleLogin);
-  }
-};
-
-document.addEventListener('DOMContentLoaded', initAuthEvents);
+initialiseAuth();
 ---
 
 <div
