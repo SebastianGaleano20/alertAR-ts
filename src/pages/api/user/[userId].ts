@@ -1,29 +1,38 @@
 import { db } from "src/firebase/server";
-import { doc, updateDoc, getDoc } from "firebase/firestore";
-import type { APIRoute } from "astro";
+import type { APIRoute, APIContext } from "astro";
 
 interface RequestBody {
   communityId: string;
 }
 
 interface Params {
-  userId: string;
+  userId?: string;
 }
+const validateInput = (userId?: string, communityId?: string): boolean => {
+  return !!(userId && communityId);
+};
 
-export const PUT: APIRoute = async ({ request, params }: { request: Request; params: Params }): Promise<Response> => {
+export const PUT: APIRoute = async ({
+  request,
+  params,
+}: APIContext): Promise<Response> => {
   try {
-    const { userId } = params; 
+    const { userId } = params as Params;
     const { communityId }: RequestBody = await request.json();
 
-    if (!userId || !communityId) {
+    if (!validateInput(userId, communityId)) {
       return new Response(
         JSON.stringify({ message: "Faltan datos requeridos" }),
         { status: 400 }
       );
     }
-
-    const userRef = doc(db, "users", userId);
-    await updateDoc(userRef, { communityId });
+    if (!userId) {
+      return new Response(JSON.stringify({ message: "userId no es string" }), {
+        status: 400,
+      });
+    }
+    const userRef = db.collection("users").doc(userId);
+    await userRef.update({ communityId });
 
     return new Response(
       JSON.stringify({ message: "Usuario actualizado con éxito" }),
@@ -38,9 +47,11 @@ export const PUT: APIRoute = async ({ request, params }: { request: Request; par
   }
 };
 
-export const GET: APIRoute = async ({ params }: { params: Params }): Promise<Response> => {
+export const GET: APIRoute = async ({
+  params,
+}: APIContext): Promise<Response> => {
   try {
-    const { userId } = params; 
+    const { userId } = params as Params;
 
     if (!userId) {
       return new Response(
@@ -49,10 +60,10 @@ export const GET: APIRoute = async ({ params }: { params: Params }): Promise<Res
       );
     }
 
-    const userRef = doc(db, "users", userId);
-    const userDoc = await getDoc(userRef);
+    const userRef = db.collection("users").doc(userId);
+    const userDoc = await userRef.get();
 
-    if (!userDoc.exists()) {
+    if (!userDoc.exists) {
       return new Response(
         JSON.stringify({ message: "Usuario no encontrado" }),
         { status: 404 }

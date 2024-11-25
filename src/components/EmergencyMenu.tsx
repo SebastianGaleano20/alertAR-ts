@@ -1,7 +1,7 @@
 // imports necesarios
-import React, { useState } from 'react';
-import { FaPhoneAlt } from 'react-icons/fa';
-import '../layouts/styles.css';
+import React, { useState } from "react";
+import { FaPhoneAlt } from "react-icons/fa";
+import "../layouts/styles.css";
 
 // Tipos de las propiedades
 interface EmergencyMenuProps {}
@@ -12,7 +12,7 @@ const EmergencyMenu: React.FC<EmergencyMenuProps> = () => {
   return (
     <div
       className="fixed left-1/2 transform -translate-x-1/2 z-50"
-      style={{ bottom: '90px' }}
+      style={{ bottom: "90px" }}
     >
       {/* Botón principal */}
       <button
@@ -26,7 +26,7 @@ const EmergencyMenu: React.FC<EmergencyMenuProps> = () => {
       {/* Lista de números de emergencia */}
       <div
         className={`absolute bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col space-y-2 ${
-          isOpen ? 'slide-in-open' : ''
+          isOpen ? "slide-in-open" : ""
         } shadow-lg`}
       >
         {/* Opción Policía */}
