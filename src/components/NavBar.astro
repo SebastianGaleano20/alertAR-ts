@@ -1,48 +1,79 @@
-<nav class="w-full fixed bottom-0 lg:top-0 lg:bottom-auto bg-blue-600 text-white flex justify-around items-center py-4 shadow-md lg:flex-row flex-row z-10">
-    <a href="/home" class="flex flex-col items-center transition duration-300 hover:text-blue-200 hover:border-b-2 hover:border-blue-200 active:text-blue-300 active:border-b-2 active:border-blue-300" data-link="/home">
+<nav
+  class="w-full fixed bottom-0 lg:top-0 lg:bottom-auto bg-blue-600 text-white flex justify-around items-center py-4 shadow-md lg:flex-row flex-row z-10"
+>
+  <a
+    href="/home"
+    class="flex flex-col items-center transition duration-300 hover:text-blue-200 hover:border-b-2 hover:border-blue-200 active:text-blue-300 active:border-b-2 active:border-blue-300"
+    data-link="/home"
+  >
     <img src="/assets/icons/home.webp" alt="Inicio" class="w-6 h-6 mb-1" />
-      <span class="text-xs">Inicio</span>
-    </a>
-    <a href="/help" class="flex flex-col items-center transition duration-300 hover:text-blue-200 hover:border-b-2 hover:border-blue-200 active:text-blue-300 active:border-b-2 active:border-blue-300" data-link="/help">
+    <span class="text-xs">Inicio</span>
+  </a>
+  <a
+    href="/help"
+    class="flex flex-col items-center transition duration-300 hover:text-blue-200 hover:border-b-2 hover:border-blue-200 active:text-blue-300 active:border-b-2 active:border-blue-300"
+    data-link="/help"
+  >
     <img src="/assets/icons/help-icon.webp" alt="Ayuda" class="w-6 h-6 mb-1" />
-      <span class="text-xs">Ayuda</span>
-    </a>
-    <a href="/profile" class="flex flex-col items-center transition duration-300 hover:text-blue-200 hover:border-b-2 hover:border-blue-200 active:text-blue-300 active:border-b-2 active:border-blue-300" data-link="/profile">
-    <img src="/assets/icons/profile-icon.webp" alt="Perfil" class="w-6 h-6 mb-1" />
-      <span class="text-xs">Perfil</span>
-    </a>
-    <a href="#" class="flex flex-col items-center transition duration-300 hover:text-blue-200 hover:border-b-2 hover:border-blue-200 active:text-blue-300 active:border-b-2 active:border-blue-300" id="logout-link">
-    <img src="/assets/icons/logout-icon.webp" alt="Cerrar Sesión" class="w-6 h-6 mb-1" />
-        <span class="text-xs">Cerrar Sesión</span>
-    </a>
-    
+    <span class="text-xs">Ayuda</span>
+  </a>
+  <a
+    href="/profile"
+    class="flex flex-col items-center transition duration-300 hover:text-blue-200 hover:border-b-2 hover:border-blue-200 active:text-blue-300 active:border-b-2 active:border-blue-300"
+    data-link="/profile"
+  >
+    <img
+      src="/assets/icons/profile-icon.webp"
+      alt="Perfil"
+      class="w-6 h-6 mb-1"
+    />
+    <span class="text-xs">Perfil</span>
+  </a>
+  <a
+    href="#"
+    class="flex flex-col items-center transition duration-300 hover:text-blue-200 hover:border-b-2 hover:border-blue-200 active:text-blue-300 active:border-b-2 active:border-blue-300"
+    id="logout-link"
+  >
+    <img
+      src="/assets/icons/logout-icon.webp"
+      alt="Cerrar Sesión"
+      class="w-6 h-6 mb-1"
+    />
+    <span class="text-xs">Cerrar Sesión</span>
+  </a>
 </nav>
 
 <script defer>
-    const links = document.querySelectorAll('nav a');
-    const currentLocation = window.location.pathname;
+  const links = document.querySelectorAll("nav a");
+  const currentLocation = window.location.pathname;
 
-    links.forEach(link => {
-        if (link.getAttribute('href') === currentLocation) {
-            link.classList.add('text-blue-300', 'border-b-2', 'border-blue-300', 'active-icon');
-        }
-    });
+  links.forEach((link) => {
+    if (link.getAttribute("href") === currentLocation) {
+      link.classList.add(
+        "text-blue-300",
+        "border-b-2",
+        "border-blue-300",
+        "active-icon"
+      );
+    }
+  });
 
-    // Función para hacer logout
-    document.getElementById('logout-link').addEventListener('click', async (event) => {
-        event.preventDefault();
-        const response = await fetch('/api/auth/signout');
-        if (response.redirected) {
-            window.location.href = response.url;
-        }
+  // Función para hacer logout
+  document
+    .getElementById("logout-link")
+    .addEventListener("click", async (event) => {
+      event.preventDefault();
+      const response = await fetch("/api/auth/signOut");
+      if (response.redirected) {
+        window.location.href = response.url;
+      }
     });
 </script>
 
-
 <style>
-    @media (max-width: 768px) {
-        .active-icon img {
-            transform: translateY(-8px);
-        }
+  @media (max-width: 768px) {
+    .active-icon img {
+      transform: translateY(-8px);
     }
+  }
 </style>
