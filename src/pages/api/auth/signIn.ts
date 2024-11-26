@@ -1,14 +1,71 @@
-import type { APIRoute } from 'astro';
-import { app } from '@/firebase/server';
+// import type { APIRoute } from 'astro';
+// import { app } from '@/firebase/server';
+// import { getAuth } from "firebase-admin/auth";
+
+// export const POST: APIRoute = async ({ request, cookies }) => {
+//     const auth = getAuth(app);
+
+//     // Obtener el token de autorización desde los headers
+//     const idToken = request.headers.get("Authorization")?.split("Bearer ")[1];
+//     if (!idToken) {
+//         return new Response(JSON.stringify({ message: "No token found" }), { status: 401 });
+//     }
+
+//     try {
+//         // Verificar el token con Firebase Admin
+//         await auth.verifyIdToken(idToken);
+//     } catch (error) {
+//         if (error instanceof Error) {
+//             console.error("Error verifying token:", error.message);
+//         } else {
+//             console.error("Unknown error occurred during token verification");
+//         }
+//         return new Response(JSON.stringify({ message: "Invalid token" }), { status: 401 });
+//     }
+
+//     // Crear una cookie de sesión
+//     const sessionCookie: string = await auth.createSessionCookie(idToken, {
+//         expiresIn: 60 * 60 * 24 * 5 * 1000, // Cookie para 5 días
+//     });
+
+//     // Guardar la cookie de sesión en el navegador
+//     cookies.set("__session", sessionCookie, {
+//         path: "/",
+//         httpOnly: true,
+//         secure: true,
+//         sameSite: "lax",
+//     });
+
+//     // Devolver la URL de redirección en JSON
+//     return new Response(JSON.stringify({ url: "/home" }), { status: 200 });
+// };
+
+import type { APIRoute } from "astro";
+import { app } from "@/firebase/server";
 import { getAuth } from "firebase-admin/auth";
 
 export const POST: APIRoute = async ({ request, cookies }) => {
     const auth = getAuth(app);
 
+    // Manejo de CORS preflight
+    if (request.method === "OPTIONS") {
+        return new Response(null, {
+            status: 204,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                "Access-Control-Allow-Methods": "POST, OPTIONS",
+            },
+        });
+    }
+
     // Obtener el token de autorización desde los headers
     const idToken = request.headers.get("Authorization")?.split("Bearer ")[1];
     if (!idToken) {
-        return new Response(JSON.stringify({ message: "No token found" }), { status: 401 });
+        return new Response(
+            JSON.stringify({ message: "No token found" }),
+            { status: 401, headers: { "Access-Control-Allow-Origin": "*" } }
+        );
     }
 
     try {
@@ -17,10 +74,16 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     } catch (error) {
         if (error instanceof Error) {
             console.error("Error verifying token:", error.message);
-        } else {
-            console.error("Unknown error occurred during token verification");
+            return new Response(
+                JSON.stringify({ message: `Invalid token: ${error.message}` }),
+                { status: 401, headers: { "Access-Control-Allow-Origin": "*" } }
+            );
         }
-        return new Response(JSON.stringify({ message: "Invalid token" }), { status: 401 });
+        console.error("Unknown error occurred during token verification");
+        return new Response(
+            JSON.stringify({ message: "Unknown error verifying token" }),
+            { status: 401, headers: { "Access-Control-Allow-Origin": "*" } }
+        );
     }
 
     // Crear una cookie de sesión
@@ -32,10 +95,15 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     cookies.set("__session", sessionCookie, {
         path: "/",
         httpOnly: true,
-        secure: true,
+        secure: false, // Cambia a true en producción
         sameSite: "lax",
     });
 
     // Devolver la URL de redirección en JSON
-    return new Response(JSON.stringify({ url: "/home" }), { status: 200 });
+    return new Response(JSON.stringify({ url: "/home" }), {
+        status: 200,
+        headers: {
+            "Access-Control-Allow-Origin": "*", // Cambia * por tu dominio en producción
+        },
+    });
 };
