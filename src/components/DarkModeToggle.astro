@@ -1,12 +1,16 @@
-<div class="switch-container">
-  <div class="sun-moon-container">
-    <span class="sun">&#9728;</span>
+---
+import "/src/scripts/toggleDarkMode.ts";
+---
+
+<div className="switch-container">
+  <div className="sun-moon-container">
+    <span className="sun">&#9728;</span>
     <!-- unicode para el sol-->
-    <label class="switch">
+    <label className="switch">
       <input type="checkbox" id="themeToggle" />
-      <div class="slider"></div>
+      <div className="slider"></div>
     </label>
-    <span class="moon">&#9790;</span>
+    <span className="moon">&#9790;</span>
     <!-- Unicode para la luna -->
   </div>
 </div>
@@ -80,4 +84,3 @@
     flex-shrink: 0;
   }
 </style>
-<script src="/src/scripts/toggleDarkMode.ts" defer></script>
