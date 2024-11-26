@@ -168,7 +168,7 @@ if (sessionResult.isAuthenticated && sessionResult.redirectUrl) {
       );
       const idToken: string = await userCredential.user.getIdToken();
 
-      const response: Response = await fetch("api/auth/signIn", {
+      const response: Response = await fetch("/api/auth/signIn", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${idToken}`,
@@ -198,7 +198,7 @@ if (sessionResult.isAuthenticated && sessionResult.redirectUrl) {
       );
       const idToken: string = await userCredential.user.getIdToken();
 
-      const response: Response = await fetch("/api/auth/signin", {
+      const response: Response = await fetch("/api/auth/signIn", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${idToken}`,

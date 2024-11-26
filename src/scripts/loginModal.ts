@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         const idToken: string = await userCredential.user.getIdToken();
 
-        const response: Response = await fetch("/api/auth/signin", {
+        const response: Response = await fetch("/api/auth/signIn", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${idToken}`,
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         const idToken: string = await userCredential.user.getIdToken();
 
-        const response: Response = await fetch("/api/auth/signin", {
+        const response: Response = await fetch("/api/auth/signIn", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${idToken}`,
