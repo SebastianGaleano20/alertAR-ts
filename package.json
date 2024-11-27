@@ -16,7 +16,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^3.6.3",
     "@astrojs/tailwind": "^5.1.2",
-    "astro": "^4.16.10",
+    "astro": "^3.0.5",
     "dotenv": "^16.4.5",
     "firebase": "^11.0.2",
     "firebase-admin": "^13.0.0",
