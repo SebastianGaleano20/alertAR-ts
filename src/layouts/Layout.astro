@@ -8,13 +8,14 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/public/assets/img/logo.webp" />
+    <link rel="icon" type="image/svg+xml" href="/assets/img/logo.webp" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-gradient-to-b from-blue-600 to-blue-200 text-black dark:bg-gradient-to-b dark:from-blue-800 dark:to-black dark:text-white h-80">
+  <body
+    class="bg-gradient-to-b from-blue-600 to-blue-200 text-black dark:bg-gradient-to-b dark:from-blue-800 dark:to-black dark:text-white h-80"
+  >
     <main>
-
       <slot />
     </main>
   </body>
@@ -27,7 +28,6 @@ const { title } = Astro.props;
     flex-direction: column;
     min-height: 100vh;
   }
-
 
   main {
     flex-grow: 1;

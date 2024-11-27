@@ -1,6 +1,6 @@
 <section
   id="registerModal"
-  class="fixed hidden inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center overflow-y-auto dark:bg-opacity-70 z-50"
+  class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center overflow-y-auto dark:bg-opacity-70 z-50"
   aria-labelledby="register-title"
   role="dialog"
   aria-modal="true"
@@ -17,8 +17,14 @@
       Cerrar
     </button>
     <header class="flex flex-col items-center justify-center mb-4 sm:mb-6">
-      <img src="/assets/icons/registration-icon.webp" alt="Icono de registro" class="w-12 h-12 sm:w-16 sm:h-16" />
-      <h2 id="register-title" class="text-center text-xl sm:text-2xl mb-4">Registrarse</h2>
+      <img
+        src="/assets/icons/registration-icon.webp"
+        alt="Icono de registro"
+        class="w-12 h-12 sm:w-16 sm:h-16"
+      />
+      <h2 id="register-title" class="text-center text-xl sm:text-2xl mb-4">
+        Registrarse
+      </h2>
     </header>
     <form action="/api/auth/register" method="post" id="registerForm">
       <article class="mb-3 sm:mb-4">
@@ -76,20 +82,56 @@
       </article>
       <article class="mb-3 sm:mb-6 relative">
         <label for="password" class="sr-only">Contraseña</label>
-        <input type="password" id="register-password" name="password" placeholder="Contraseña" class="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm" required />
-        <button type="button" id="regTogglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600">
-          <img src="/assets/icons/eye-icon.svg" alt="Mostrar" id="reg-eye-icon" class="w-5 h-5" />
+        <input
+          type="password"
+          id="register-password"
+          name="password"
+          placeholder="Contraseña"
+          class="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm"
+          required
+        />
+        <button
+          type="button"
+          id="regTogglePassword"
+          class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600"
+        >
+          <img
+            src="/assets/icons/eye-icon.svg"
+            alt="Mostrar"
+            id="reg-eye-icon"
+            class="w-5 h-5"
+          />
         </button>
       </article>
       <article class="mb-3 sm:mb-6 relative">
-        <label for="password-confirm" class="sr-only">Confirmar contraseña</label>
-        <input type="password" id="register-password-confirm" name="password-confirm" placeholder="Confirmar contraseña" class="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm" required />
-        <button type="button" id="toggleConfirmPassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600">
-          <img src="/assets/icons/eye-icon.svg" alt="Mostrar" id="confirm-eye-icon" class="w-5 h-5" />
+        <label for="password-confirm" class="sr-only"
+          >Confirmar contraseña</label
+        >
+        <input
+          type="password"
+          id="register-password-confirm"
+          name="password-confirm"
+          placeholder="Confirmar contraseña"
+          class="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm"
+          required
+        />
+        <button
+          type="button"
+          id="toggleConfirmPassword"
+          class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600"
+        >
+          <img
+            src="/assets/icons/eye-icon.svg"
+            alt="Mostrar"
+            id="confirm-eye-icon"
+            class="w-5 h-5"
+          />
         </button>
       </article>
-      <article id="password-error" class="text-red-500 text-xs hidden">Las contraseñas no coinciden.</article>
-      
+      <article id="password-error" class="text-red-500 text-xs hidden">
+        Las contraseñas no coinciden.
+      </article>
+
       <article class="mb-3 sm:mb-6">
         <article class="flex items-center">
           <input
@@ -100,7 +142,11 @@
             required
           />
           <label for="terms" class="ml-2 text-white text-xs sm:text-sm">
-            Acepto los <a href="/terms-and-conditions" class="text-blue-500 hover:text-blue-900">Términos y Condiciones</a>
+            Acepto los <a
+              href="/terms-and-conditions"
+              class="text-blue-500 hover:text-blue-900"
+              >Términos y Condiciones</a
+            >
           </label>
         </article>
       </article>
@@ -115,41 +161,69 @@
 </section>
 
 <script>
- document.addEventListener("DOMContentLoaded", () => {
-  const regTogglePassword = document.getElementById('regTogglePassword') as HTMLButtonElement;
-  const regPasswordField = document.getElementById('register-password') as HTMLInputElement;
-  const regEyeIcon = document.getElementById('reg-eye-icon') as HTMLImageElement; 
+  document.addEventListener("DOMContentLoaded", () => {
+    const regTogglePassword = document.getElementById(
+      "regTogglePassword"
+    ) as HTMLButtonElement;
+    const regPasswordField = document.getElementById(
+      "register-password"
+    ) as HTMLInputElement;
+    const regEyeIcon = document.getElementById(
+      "reg-eye-icon"
+    ) as HTMLImageElement;
 
-  regTogglePassword.addEventListener('click', () => {
-    const type = regPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
-    regPasswordField.setAttribute('type', type);
-    regEyeIcon.src = type === 'password' ? '/assets/icons/eye-icon.svg' : '/assets/icons/eye-slash-icon.svg';
+    regTogglePassword.addEventListener("click", () => {
+      const type =
+        regPasswordField.getAttribute("type") === "password"
+          ? "text"
+          : "password";
+      regPasswordField.setAttribute("type", type);
+      regEyeIcon.src =
+        type === "password"
+          ? "/assets/icons/eye-icon.svg"
+          : "/assets/icons/eye-slash-icon.svg";
+    });
+
+    const toggleConfirmPassword = document.getElementById(
+      "toggleConfirmPassword"
+    ) as HTMLButtonElement;
+    const confirmPasswordField = document.getElementById(
+      "register-password-confirm"
+    ) as HTMLInputElement;
+    const confirmEyeIcon = document.getElementById(
+      "confirm-eye-icon"
+    ) as HTMLImageElement;
+
+    toggleConfirmPassword.addEventListener("click", () => {
+      const type =
+        confirmPasswordField.getAttribute("type") === "password"
+          ? "text"
+          : "password";
+      confirmPasswordField.setAttribute("type", type);
+
+      confirmEyeIcon.src =
+        type === "password"
+          ? "/assets/icons/eye-icon.svg"
+          : "/assets/icons/eye-slash-icon.svg";
+    });
+
+    const registerForm = document.getElementById(
+      "registerForm"
+    ) as HTMLFormElement;
+    const passwordError = document.getElementById(
+      "password-error"
+    ) as HTMLInputElement;
+
+    registerForm.addEventListener("submit", (e: SubmitEvent) => {
+      const password = regPasswordField.value;
+      const confirmPassword = confirmPasswordField.value;
+
+      if (password !== confirmPassword) {
+        e.preventDefault();
+        passwordError.classList.remove("hidden");
+      } else {
+        passwordError.classList.add("hidden");
+      }
+    });
   });
-
-  const toggleConfirmPassword = document.getElementById('toggleConfirmPassword') as HTMLButtonElement;
-  const confirmPasswordField = document.getElementById('register-password-confirm') as HTMLInputElement;
-  const confirmEyeIcon = document.getElementById('confirm-eye-icon') as HTMLImageElement;
-
-  toggleConfirmPassword.addEventListener('click', () => {
-    const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
-    confirmPasswordField.setAttribute('type', type);
-
-    confirmEyeIcon.src = type === 'password' ? '/assets/icons/eye-icon.svg' : '/assets/icons/eye-slash-icon.svg';
-  });
-
-  const registerForm = document.getElementById('registerForm') as HTMLFormElement;
-  const passwordError = document.getElementById('password-error') as HTMLInputElement;
-
-  registerForm.addEventListener('submit', (e: SubmitEvent) => {
-    const password = regPasswordField.value;
-    const confirmPassword = confirmPasswordField.value;
-
-    if (password !== confirmPassword) {
-      e.preventDefault(); 
-      passwordError.classList.remove('hidden');
-    } else {
-      passwordError.classList.add('hidden');
-    }
-  });
-}); 
 </script>
