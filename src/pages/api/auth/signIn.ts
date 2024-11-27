@@ -30,9 +30,6 @@ export const POST: APIRoute = async ({
   }
 
   try {
-    // Verify the token with Firebase Admin
-    const decodedToken: DecodedIdToken = await auth.verifyIdToken(idToken);
-
     // Create a session cookie
     const sessionCookie: string = await auth.createSessionCookie(idToken, {
       expiresIn: 60 * 60 * 24 * 5 * 1000, // 5 days in milliseconds

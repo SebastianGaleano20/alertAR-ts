@@ -1,97 +1,104 @@
-const alertButton = document.getElementById('alertButton') as HTMLElement | null;
-const alertModal = document.getElementById('alertModal') as HTMLElement | null;
-const alertModalContent = document.getElementById('alertModalContent') as HTMLElement | null;
-const closeAlertModalBtn = document.getElementById('closeAlertModalBtn') as HTMLElement | null;
-
-if (alertButton && alertModal && alertModalContent && closeAlertModalBtn) {
-  function getButtonCoordinates(): { top: number; left: number } {
-    const rect = alertButton.getBoundingClientRect();
-    return { top: rect.top, left: rect.left };
-  }
-
-  alertButton.addEventListener('click', () => {
-    alertModal.classList.remove('hidden');
-
-    const { top, left } = getButtonCoordinates();
-
-    alertModalContent.style.transform = `translate(${left - window.innerWidth}px, ${top - window.innerHeight}px) scale(0.5)`;
-    alertModalContent.style.opacity = '0';
-
-    setTimeout(() => {
-      alertModalContent.style.transform = 'translate(0, 0) scale(1)';
-      alertModalContent.style.opacity = '1';
-    }, 50);
-  });
-
-  closeAlertModalBtn.addEventListener('click', () => {
-    closeModal();
-  });
-
-  window.addEventListener('click', (event) => {
-    if (event.target === alertModal) {
-      closeModal();
-    }
-  });
-
-  function closeModal(): void {
-    const { top, left } = getButtonCoordinates();
-    alertModalContent.style.transform = `translate(${left - window.innerWidth}px, ${top - window.innerHeight}px) scale(0.5)`;
-    alertModalContent.style.opacity = '0';
-    setTimeout(() => {
-      alertModal.classList.add('hidden');
-    }, 300);
-  }
-} else {
-  console.error('One or more elements could not be found in the DOM.');
+interface Coordinates {
+  top: number;
+  left: number;
 }
 
+class AlertModalManager {
+  private alertButton: HTMLElement | null;
+  private alertModal: HTMLElement | null;
+  private alertModalContent: HTMLElement | null;
+  private closeAlertModalBtn: HTMLElement | null;
 
-// const alertButton = document.getElementById('alertButton');
-// const alertModal = document.getElementById('alertModal');
-// const alertModalContent = document.getElementById('alertModalContent');
-// const closeAlertModalBtn = document.getElementById('closeAlertModalBtn');
+  constructor() {
+    this.alertButton = document.getElementById("alertButton");
+    this.alertModal = document.getElementById("alertModal");
+    this.alertModalContent = document.getElementById("alertModalContent");
+    this.closeAlertModalBtn = document.getElementById("closeAlertModalBtn");
 
+    this.initializeEventListeners();
+  }
 
-// function getButtonCoordinates() {
-//   const rect = alertButton.getBoundingClientRect();
-//   return { top: rect.top, left: rect.left };
-// }
+  private initializeEventListeners(): void {
+    if (!this.validateElements()) return;
 
-// alertButton.addEventListener('click', () => {
-//   alertModal.classList.remove('hidden');
+    this.alertButton?.addEventListener("click", this.openModal.bind(this));
+    this.closeAlertModalBtn?.addEventListener(
+      "click",
+      this.closeModal.bind(this)
+    );
 
+    window.addEventListener("click", (event: MouseEvent) => {
+      if (event.target === this.alertModal) {
+        this.closeModal();
+      }
+    });
+  }
 
-//   const { top, left } = getButtonCoordinates();
+  private validateElements(): boolean {
+    return !!(
+      this.alertButton &&
+      this.alertModal &&
+      this.alertModalContent &&
+      this.closeAlertModalBtn
+    );
+  }
 
- 
-//   alertModalContent.style.transform = `translate(${left - window.innerWidth}px, ${top - window.innerHeight}px) scale(0.5)`;
-//   alertModalContent.style.opacity = '0';
+  private getButtonCoordinates(): Coordinates {
+    if (!this.alertButton) return { top: 0, left: 0 };
 
-//   setTimeout(() => {
-//     alertModalContent.style.transform = 'translate(0, 0) scale(1)';
-//     alertModalContent.style.opacity = '1';
-//   }, 50);
-// });
+    const rect = this.alertButton.getBoundingClientRect();
+    return {
+      top: rect.top,
+      left: rect.left,
+    };
+  }
 
+  private openModal(): void {
+    if (!this.validateElements()) return;
 
-// closeAlertModalBtn.addEventListener('click', () => {
-//   closeModal();
-// });
+    this.alertModal?.classList.remove("hidden");
 
-// window.addEventListener('click', (event) => {
-//   if (event.target === alertModal) {
-//     closeModal();
-//   }
-// });
+    const { top, left } = this.getButtonCoordinates();
 
+    if (this.alertModalContent) {
+      this.alertModalContent.style.transform = `translate(${
+        left - window.innerWidth
+      }px, ${top - window.innerHeight}px) scale(0.5)`;
+      this.alertModalContent.style.opacity = "0";
 
-// function closeModal() {
-//   const { top, left } = getButtonCoordinates();
-//   alertModalContent.style.transform = `translate(${left - window.innerWidth}px, ${top - window.innerHeight}px) scale(0.5)`;
-//   alertModalContent.style.opacity = '0';
-//   setTimeout(() => {
-//     alertModal.classList.add('hidden');
-//   }, 300); 
-// }
+      setTimeout(() => {
+        if (this.alertModalContent) {
+          this.alertModalContent.style.transform = "translate(0, 0) scale(1)";
+          this.alertModalContent.style.opacity = "1";
+        }
+      }, 50);
+    }
+  }
 
+  private closeModal(): void {
+    if (!this.validateElements()) return;
 
+    const { top, left } = this.getButtonCoordinates();
+
+    if (this.alertModalContent) {
+      this.alertModalContent.style.transform = `translate(${
+        left - window.innerWidth
+      }px, ${top - window.innerHeight}px) scale(0.5)`;
+      this.alertModalContent.style.opacity = "0";
+    }
+
+    setTimeout(() => {
+      this.alertModal?.classList.add("hidden");
+    }, 300);
+  }
+
+  // Método estático para inicializar la instancia
+  static initialize(): AlertModalManager {
+    return new AlertModalManager();
+  }
+}
+
+// Uso
+document.addEventListener("DOMContentLoaded", () => {
+  AlertModalManager.initialize();
+});

@@ -1,5 +1,3 @@
-import type { Auth } from "firebase/auth";
-
 export interface FirebaseAuthError extends Error {
   code: string;
 }

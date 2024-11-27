@@ -1,4 +1,4 @@
-import type { CookieOptions } from "@/utils/cookies";
+import type { CookieOptions } from "@/types/auth/cookies";
 
 export interface AuthRequest {
   request: Request;
