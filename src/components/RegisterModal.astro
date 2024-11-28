@@ -163,13 +163,13 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const regTogglePassword = document.getElementById(
-      "regTogglePassword"
+      "regTogglePassword",
     ) as HTMLButtonElement;
     const regPasswordField = document.getElementById(
-      "register-password"
+      "register-password",
     ) as HTMLInputElement;
     const regEyeIcon = document.getElementById(
-      "reg-eye-icon"
+      "reg-eye-icon",
     ) as HTMLImageElement;
 
     regTogglePassword.addEventListener("click", () => {
@@ -185,13 +185,13 @@
     });
 
     const toggleConfirmPassword = document.getElementById(
-      "toggleConfirmPassword"
+      "toggleConfirmPassword",
     ) as HTMLButtonElement;
     const confirmPasswordField = document.getElementById(
-      "register-password-confirm"
+      "register-password-confirm",
     ) as HTMLInputElement;
     const confirmEyeIcon = document.getElementById(
-      "confirm-eye-icon"
+      "confirm-eye-icon",
     ) as HTMLImageElement;
 
     toggleConfirmPassword.addEventListener("click", () => {
@@ -208,10 +208,10 @@
     });
 
     const registerForm = document.getElementById(
-      "registerForm"
+      "registerForm",
     ) as HTMLFormElement;
     const passwordError = document.getElementById(
-      "password-error"
+      "password-error",
     ) as HTMLInputElement;
 
     registerForm.addEventListener("submit", (e: SubmitEvent) => {

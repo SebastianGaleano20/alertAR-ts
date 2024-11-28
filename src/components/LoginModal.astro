@@ -6,39 +6,40 @@ import type { SessionCheckResult } from "../types/auth/index";
 
 const auth = getAuth(app);
 
-async function checkSession(): Promise<SessionCheckResult> {
+async function checkSession() {
   if (Astro.cookies.has("__session")) {
     const sessionCookie = Astro.cookies.get("__session")?.value;
     try {
       const decodedCookie: DecodedIdToken = await auth.verifySessionCookie(
-        sessionCookie!
+        sessionCookie!,
       );
       if (decodedCookie) {
-        return {
-          isAuthenticated: true,
-          redirectUrl: "/chat",
-        };
+        // return {
+        //   isAuthenticated: true,
+        //   redirectUrl: "/chat",
+        // };
+        return Astro.redirect("/chat");
       }
     } catch (error) {
       console.error("Error al verificar la cookie de sesión:", error);
-      return {
-        isAuthenticated: false,
-        error: "Invalid session",
-      };
+      // return {
+      //   isAuthenticated: false,
+      //   error: "Invalid session",
+      // };
     }
   }
-  return { isAuthenticated: false };
+  // return { isAuthenticated: false };
 }
-
-const sessionResult = await checkSession();
-if (sessionResult.isAuthenticated && sessionResult.redirectUrl) {
-  return Astro.redirect(sessionResult.redirectUrl);
-}
+await checkSession();
+// const sessionResult = await checkSession();
+// if (sessionResult.isAuthenticated && sessionResult.redirectUrl) {
+//   return Astro.redirect(sessionResult.redirectUrl);
+// }
 ---
 
 <div
   id="loginModal"
-  class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center dark:bg-opacity-70 z-50"
+  class="fixed hidden inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center dark:bg-opacity-70 z-50"
 >
   <section
     class="bg-gradient-to-b from-blue-300 to-blue-700 dark:bg-gradient-to-b dark:from-blue-800 dark:to-black dark:text-white p-6 md:p-10 rounded-2xl shadow-md w-full max-w-md relative max-h-[90vh] overflow-auto"
@@ -164,7 +165,7 @@ if (sessionResult.isAuthenticated && sessionResult.redirectUrl) {
       const userCredential: UserCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const idToken: string = await userCredential.user.getIdToken();
 
@@ -194,7 +195,7 @@ if (sessionResult.isAuthenticated && sessionResult.redirectUrl) {
     try {
       const userCredential: UserCredential = await signInWithPopup(
         auth,
-        provider
+        provider,
       );
       const idToken: string = await userCredential.user.getIdToken();
 
