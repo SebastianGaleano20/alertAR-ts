@@ -28,8 +28,13 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/vue": "^8.1.0",
     "@types/node": "^22.9.3",
     "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1"
+    "@types/react-dom": "^18.3.1",
+    "@vitest/ui": "^2.1.6",
+    "vitest": "^2.1.6"
   }
 }

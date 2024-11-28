@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { initializeModal, togglePasswordVisibility } from "@/src/scripts/modal.ts";
+import { initializeModal, togglePasswordVisibility } from "@/scripts/modal";
 
 describe("Modal Functions", () => {
   it("should open the modal when the open button is clicked", () => {
@@ -35,12 +35,18 @@ describe("Modal Functions", () => {
     passwordField.setAttribute("type", "password");
     eyeIcon.src = "/assets/icons/eye-icon.svg";
 
-    togglePasswordVisibility(passwordField as HTMLInputElement, eyeIcon as HTMLImageElement);
+    togglePasswordVisibility(
+      passwordField as HTMLInputElement,
+      eyeIcon as HTMLImageElement
+    );
 
     expect(passwordField.getAttribute("type")).toBe("text");
     expect(eyeIcon.src).toContain("/assets/icons/eye-slash-icon.svg");
 
-    togglePasswordVisibility(passwordField as HTMLInputElement, eyeIcon as HTMLImageElement);
+    togglePasswordVisibility(
+      passwordField as HTMLInputElement,
+      eyeIcon as HTMLImageElement
+    );
 
     expect(passwordField.getAttribute("type")).toBe("password");
     expect(eyeIcon.src).toContain("/assets/icons/eye-icon.svg");

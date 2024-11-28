@@ -1,7 +1,11 @@
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import type { ServiceAccount } from "firebase-admin";
+import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 import * as dotenv from "dotenv";
+import type { DecodedIdToken } from "firebase-admin/auth";
+import type { SessionCheckResult } from "../types/auth/index";
+
 dotenv.config();
 
 const activeApps = getApps();
@@ -21,7 +25,6 @@ const serviceAccount = {
 const initApp = () => {
   if (import.meta.env.PROD) {
     console.info("PROD env detected. Using default service account.");
-    // Use default config in firebase functions. Should be already injected in the server by Firebase.
     return initializeApp();
   }
   console.info("Loading service account from env.");
@@ -31,5 +34,30 @@ const initApp = () => {
 };
 
 export const app = activeApps.length === 0 ? initApp() : activeApps[0];
-
 export const db = getFirestore(app);
+
+// ** Add the checkSession function **
+const auth = getAuth(app);
+
+export async function checkSession(
+  cookieValue: string
+): Promise<SessionCheckResult> {
+  try {
+    const decodedCookie: DecodedIdToken = await auth.verifySessionCookie(
+      cookieValue
+    );
+    if (decodedCookie) {
+      return {
+        isAuthenticated: true,
+        redirectUrl: "/chat",
+      };
+    }
+  } catch (error) {
+    console.error("Error verifying session cookie:", error);
+    return {
+      isAuthenticated: false,
+      error: "Invalid session",
+    };
+  }
+  return { isAuthenticated: false };
+}
