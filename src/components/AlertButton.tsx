@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AlertButton = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -7,7 +7,7 @@ const AlertButton = () => {
 
   const handleButtonClick = (): void => {
     setScreenRed(true);
-    const audio = new Audio('/assets/audio/siren.mp3');
+    const audio = new Audio("/assets/audio/siren.mp3");
     audio.play();
     setTimeout(() => {
       setModalOpen(true);
@@ -25,7 +25,7 @@ const AlertButton = () => {
       <button
         id="alertButton"
         className={`flex flex-col items-center justify-center bg-red-500 text-white w-full h-40 md:h-64 rounded-full shadow-lg transition-all duration-200 hover:shadow-2xl ${
-          isShaking ? 'animate-shake' : ''
+          isShaking ? "animate-shake" : ""
         }`}
         onMouseEnter={() => setShaking(true)}
         onMouseLeave={() => setShaking(false)}
@@ -45,8 +45,8 @@ const AlertButton = () => {
           id="alertModal"
           className={`fixed inset-0 flex items-center justify-center transition-all duration-300 ${
             isScreenRed
-              ? 'bg-red-500 bg-opacity-50'
-              : 'bg-gray-900 bg-opacity-50 dark:bg-opacity-70'
+              ? "bg-red-500 bg-opacity-50"
+              : "bg-gray-900 bg-opacity-50 dark:bg-opacity-70"
           }`}
         >
           <article

@@ -42,9 +42,9 @@ import ThemeIcon from "../components/DarkModeToggle.astro";
         </a>
 
         <!-- Botón de Alerta -->
-        <AlertButton />
+        <AlertButton client:load />
       </div>
     </div>
-    <EmergencyMenu />
+    <EmergencyMenu client:load />
   </main>
 </Layout>
